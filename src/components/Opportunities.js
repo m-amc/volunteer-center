@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Opportunities = (props) => {
     const postingData = props.postingData;
@@ -31,5 +32,8 @@ const Opportunities = (props) => {
     )
 }
 
+Opportunities.propTypes = {
+    props: PropTypes.object
+}
 
 export default Opportunities;

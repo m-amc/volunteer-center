@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import firebase from '../firebase';
-import '.././partials/App.scss';
+import stateData from './state';
 import Header from './Header';
 import Opportunities from './Opportunities';
 import Management from './Management';
-import stateData from './state';
 import Category from './Category';
+import Footer from './Footer';
+import '.././partials/App.scss';
 
 // !!!!! NOTE: REMEMBER TO REMOVE FIREBASE.JS IN GITIGNORE !!!!!!
 
@@ -19,6 +20,7 @@ class App extends Component {
 
     // Set state to the state.js stateData variable.
     this.state = stateData;
+
     this.today = new Date();
 
     this.dbRef = firebase.database().ref();
@@ -39,6 +41,7 @@ class App extends Component {
       const newPostingData = [];
 
       // Loop through the postingData variable that holds the posting data object and push the data to the new array.  This will render the data to the page via render().  Any new data added will also re-render due to dbRef.on('value') always listening to changes.
+      // eslint-disable-next-line
       for (let index in filteredPostings) {
         newPostingData.push(this.postingData[index])
       }
@@ -54,6 +57,7 @@ class App extends Component {
     const filterPostingData = this.filterPostings(this.postingData, event.target.value);
     const newPostingData = [];
 
+    // eslint-disable-next-line
     for (let index in filterPostingData) {
       newPostingData.push(filterPostingData[index])
     }
@@ -64,11 +68,12 @@ class App extends Component {
     });
   }
 
-  // Function to filter the postings. Note: There's no filter() for objects.
+  // Function to filter the postings. There's no filter() for objects so we need to filter it through for in loop
   filterPostings = (postingObject, selectedCategory) => {
     // Create an empty filteredPostings object.  We will push filtered postings here
     const filteredPostings = {};
 
+    // eslint-disable-next-line
     for (let key in postingObject) {
       // Convert the stored postings end_date to date first
       const endDate = new Date(postingObject[key].end_date);
@@ -102,11 +107,18 @@ class App extends Component {
           {
             this.state.isManagement ? <Management app={this} /> :
               <React.Fragment>
-                <Category onChange={this.handleCategoryChange} value={this.filteredCategory} />
+                <p>Filter:</p>
+                <Category 
+                  onChange={this.handleCategoryChange} 
+                  value={this.state.filteredCategory}
+                  defaultText="All Category"
+                />
                 <Opportunities postingData={this.state.postings} />
               </React.Fragment>
           }
         </main>
+        
+        <Footer />
       </div>
     );
   }

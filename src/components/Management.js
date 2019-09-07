@@ -1,16 +1,26 @@
 import React from 'react';
 import Category from './Category';
+import PropTypes from 'prop-types';
 import '../partials/_main.scss';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import successful, {dateRangeError} from '../alerts'
+
 
 const Management = (props) => {
     const dbRef = props.app.dbRef.child('posting'),
         appState = props.app.state,
         app = props.app;
 
-
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        // Validate date range. Do not continue if there's an error. 
+        if (appState.end_date < appState.start_date) {
+            dateRangeError();
+            return
+        }
+        
         // The dbRef push property will be able to return the object key but it needs to be assigned to variable first before setting the state
         const newPostRef = dbRef.push();
         newPostRef.set({
@@ -25,9 +35,9 @@ const Management = (props) => {
             category: appState.category,
             role: appState.role,
             role_description: appState.role_description,
-            start_date: appState.start_date,
-            created: appState.created,
-            end_date: appState.end_date
+            start_date: appState.start_date.toLocaleDateString(),
+            end_date: appState.end_date.toLocaleDateString(),
+            created: appState.created
         });
 
         // Clear the fields after submit
@@ -42,10 +52,12 @@ const Management = (props) => {
             category: '',
             role: '',
             role_description: '',
-            start_date: new Date().toLocaleDateString(),
-            end_date: new Date().toLocaleDateString(),
+            start_date: new Date(),
+            end_date: new Date(),
             created: Date.now()
         })
+
+        successful();
     }
 
     const handleChange = (event) => {
@@ -56,6 +68,7 @@ const Management = (props) => {
 
     return (
         <form action="" onSubmit={handleSubmit}>
+
             <fieldset>
                 <legend>Company Information</legend>
                 <label htmlFor="organization">Organization Name</label>
@@ -65,6 +78,8 @@ const Management = (props) => {
                     name="organization"
                     onChange={handleChange}
                     value={appState.organization}
+                    placeholder="Company ABC"
+                    size="30"
                     required
                 />
 
@@ -75,6 +90,7 @@ const Management = (props) => {
                     name="address"
                     onChange={handleChange}
                     value={appState.address}
+                    placeholder="123 Main Street"
                     required
                 />
 
@@ -101,10 +117,12 @@ const Management = (props) => {
                 <label htmlFor="phone">Phone</label>
                 <input
                     id="phone"
-                    type="text"
+                    type="tel"
                     name="phone"
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     onChange={handleChange}
                     value={appState.phone}
+                    placeholder="416-xxx-xxxx"
                     required
                 />
 
@@ -115,6 +133,7 @@ const Management = (props) => {
                     name="website"
                     onChange={handleChange}
                     value={appState.website}
+                    placeholder="http://yourcompany.com"
                 />
 
                 <label htmlFor="email">Email</label>
@@ -124,6 +143,8 @@ const Management = (props) => {
                     name="email"
                     onChange={handleChange}
                     value={appState.email}
+                    size="30"
+                    placeholder="johndoe@domain.com"
                 />
             </fieldset>
 
@@ -133,11 +154,11 @@ const Management = (props) => {
                 <Category
                     name="category"
                     id="category"
-                    name="category"
                     app={app}
                     onChange={handleChange}
                     value={appState.category}
                     required="required"
+                    defaultText="Select Category"
                 />
 
                 <label htmlFor="role">Role</label>
@@ -153,7 +174,7 @@ const Management = (props) => {
                 <label htmlFor="roleDescription">Description</label>
                 <textarea
                     rows="10"
-                    cols="80"
+                    cols="50"
                     maxLength="500"
                     id="roleDescription"
                     type="text"
@@ -164,24 +185,17 @@ const Management = (props) => {
                 />
 
                 <label htmlFor="startDate">Start Date</label>
-                <input
-                    id="startDate"
-                    type="date"
-                    name="start_date"
-                    onChange={handleChange}
-                    value={appState.start_date}
-                    required
+                <DatePicker
+                    selected={appState.start_date}
+                    onChange={(e) => app.setState({ start_date: e })}
+                    minDate={new Date()}
                 />
 
-
                 <label htmlFor="endDate">End Date</label>
-                <input
-                    id="endDate"
-                    type="date"
-                    name="end_date"
-                    onChange={handleChange}
-                    value={appState.end_date}
-                    required
+                <DatePicker
+                    selected={appState.end_date}
+                    onChange={(e) => app.setState({ end_date: e })}
+                    minDate={appState.start_date}
                 />
             </fieldset>
 
@@ -189,5 +203,9 @@ const Management = (props) => {
         </form>
     )
 }
+
+Management.propTypes = {
+    props: PropTypes.object
+};
 
 export default Management;
