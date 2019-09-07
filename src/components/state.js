@@ -1,3 +1,5 @@
+const today = new Date();
+
 const stateData =  {
     postings: [],
     id: '',
@@ -11,10 +13,12 @@ const stateData =  {
     category: '',
     role: '',
     role_description: '',
-    start_date: new Date().toLocaleDateString(),
-    end_date: new Date().toLocaleDateString(),
+    start_date: today.toLocaleDateString(),
+    end_date: today.toLocaleDateString(),
+    created: Date.now(),
     isManagement: false,
     headerButtonText: 'Post Opportunities',
+    filteredCategory: ''
 }
 
 export default stateData;

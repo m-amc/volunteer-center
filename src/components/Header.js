@@ -1,4 +1,5 @@
 import React from 'react';
+import '../partials/_header.scss';
 
 const Header = (props) => {
     const handleSubmit = (event) => {
@@ -28,7 +29,7 @@ const Header = (props) => {
     }
 
     return(
-        <header>
+        <header className="wrapper">
             <h1>Volunteer Center</h1>
             <button onClick={handleSubmit}>{props.app.state.headerButtonText}</button>
         </header>

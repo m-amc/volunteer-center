@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import firebase from '../firebase';
-import '../App.css';
+import '.././partials/App.scss';
 import Header from './Header';
 import Opportunities from './Opportunities';
 import Management from './Management';
 import stateData from './state';
+import Category from './Category';
 
 // !!!!! NOTE: REMEMBER TO REMOVE FIREBASE.JS IN GITIGNORE !!!!!!
 
@@ -29,17 +30,17 @@ class App extends Component {
 
     dbRef.on('value', (response) => {
       // response returns the whole database object so just grab the child (posting)
-      const postingData = response.val().posting;
+      this.postingData = response.val().posting;
 
       // Filter the postings where end dates are greater or equal to today's date
-      const filteredPostings = this.filterPostings(postingData);
+      const filteredPostings = this.filterPostings(this.postingData);
 
       // Because we can't directly change the state, we have to create a new array.
       const newPostingData = [];
 
       // Loop through the postingData variable that holds the posting data object and push the data to the new array.  This will render the data to the page via render().  Any new data added will also re-render due to dbRef.on('value') always listening to changes.
       for (let index in filteredPostings) {
-        newPostingData.push(postingData[index])
+        newPostingData.push(this.postingData[index])
       }
 
       // Here we re-assign the postings state to the newPostingData and we need to clear the role state.
@@ -49,18 +50,40 @@ class App extends Component {
     })
   }
 
+  handleCategoryChange = (event) => {
+    const filterPostingData = this.filterPostings(this.postingData, event.target.value);
+    const newPostingData = [];
+
+    for (let index in filterPostingData) {
+      newPostingData.push(filterPostingData[index])
+    }
+
+    this.setState({
+      filteredCategory: event.target.value,
+      postings: newPostingData
+    });
+  }
+
   // Function to filter the postings. Note: There's no filter() for objects.
-  filterPostings = (postingObject) => {
+  filterPostings = (postingObject, selectedCategory) => {
     // Create an empty filteredPostings object.  We will push filtered postings here
     const filteredPostings = {};
 
     for (let key in postingObject) {
       // Convert the stored postings end_date to date first
       const endDate = new Date(postingObject[key].end_date);
+      const category = postingObject[key].category;
 
-      // Push to the filteredPostings object those postings that are ending today and in the future
-      if (endDate >= this.today) {
-        filteredPostings[key] = postingObject[key];
+      // undefined is the value of the category filter on initial load. empty string when selected
+      if ((selectedCategory === undefined) || (selectedCategory === '')) {
+        // Push to the filteredPostings object those postings that are ending today and in the future
+        if (endDate >= this.today) {
+          filteredPostings[key] = postingObject[key];
+        }
+      } else {
+        if (endDate >= this.today && category === selectedCategory) {
+          filteredPostings[key] = postingObject[key];
+        }
       }
     }
 
@@ -69,14 +92,21 @@ class App extends Component {
 
   render() {
     console.log("RENDER HERE");
+
     return (
       <div className="app">
-        <Header app={this} />
 
-        {
-          // Conditional Rendering
-          this.state.isManagement ? <Management app={this} /> : <Opportunities postingData={this.state.postings} />
-        }
+        <Header app={this}/>
+
+        <main className="wrapper">
+          {
+            this.state.isManagement ? <Management app={this} /> :
+              <React.Fragment>
+                <Category onChange={this.handleCategoryChange} value={this.filteredCategory} />
+                <Opportunities postingData={this.state.postings} />
+              </React.Fragment>
+          }
+        </main>
       </div>
     );
   }
