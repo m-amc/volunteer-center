@@ -1,3 +1,23 @@
+@import './variablesAndMixins.scss';
+
 header {
     text-align: center;
+    font-family: $headingFont;
+    background-color: $primaryColor;
+    background-image: url('../assets/anna-earl-J-Jb1niw1j0-unsplash.jpg');
+    background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+
+    height: 40vh;
+
+    h1 {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.plainHeader{
+    background-image: none;
+    height: 15vh;
 }

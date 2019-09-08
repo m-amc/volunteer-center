@@ -12,14 +12,14 @@ const Opportunities = (props) => {
                         <li key={index}>
                             <div>
                                 <h2>{post.role}</h2>
-                                <p>From {post.start_date} to {post.end_date}</p>
-                                <p>{post.role_description}</p>
-                                <p className="posted">Posted {new Date(post.created).toLocaleDateString()}</p>
+                                <p className="postingDateRange">From {post.start_date} to {post.end_date}</p>
+                                <p className="postingRoleDescription">{post.role_description}</p>
+                                <p className="postedDate">Posted {new Date(post.created).toLocaleDateString()}</p>
                             </div>
 
                             <div>
                                 <h3>{post.organization}</h3>
-                                <p>{post.address}, {post.city} {post.state}</p>
+                                <p className="postingAddress">{post.address} <span>{post.city},  {post.state}</span></p>
                                 <p>{post.phone}</p>
                                 <p>{post.website}</p>
                                 <p>{post.email_address}</p>

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../partials/_header.scss';
 
-const Header = (props) => {
+const Header = ({app}) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -12,7 +12,7 @@ const Header = (props) => {
 
         let newState = {};
 
-        if (props.app.state.isManagement) {
+        if (app.state.isManagement) {
             newState = {
                 isManagement: false,
                 headerButtonText: 'Post Opportunities'
@@ -25,13 +25,13 @@ const Header = (props) => {
         }
 
         // Set the app state with newState
-        props.app.setState(newState);
+        app.setState(newState);
     }
 
     return(
-        <header className="wrapper">
+        <header className={app.state.isManagement ? 'plainHeader' : ''}>
             <h1>Volunteer Center</h1>
-            <button onClick={handleSubmit}>{props.app.state.headerButtonText}</button>
+            <button onClick={handleSubmit}>{app.state.headerButtonText}</button>
         </header>
     )
 }

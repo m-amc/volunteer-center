@@ -173,14 +173,14 @@ const Management = (props) => {
 
                 <label htmlFor="roleDescription">Description</label>
                 <textarea
-                    rows="10"
-                    cols="50"
+                    className="textArea"
                     maxLength="500"
                     id="roleDescription"
                     type="text"
                     name="role_description"
                     onChange={handleChange}
                     value={appState.role_description}
+                    placeholder="What is the role about? How to apply? (Maximum of 500 characters)"
                     required
                 />
 

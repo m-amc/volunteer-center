@@ -4,9 +4,10 @@ import stateData from './state';
 import Header from './Header';
 import Opportunities from './Opportunities';
 import Management from './Management';
-import Category from './Category';
 import Footer from './Footer';
 import '.././partials/App.scss';
+import '../fontawesome';
+import FilterCategory from './FilterCategory';
 
 // !!!!! NOTE: REMEMBER TO REMOVE FIREBASE.JS IN GITIGNORE !!!!!!
 
@@ -101,23 +102,21 @@ class App extends Component {
     return (
       <div className="app">
 
-        <Header app={this}/>
+        <Header app={this} />
 
         <main className="wrapper">
-          {
-            this.state.isManagement ? <Management app={this} /> :
-              <React.Fragment>
-                <p>Filter:</p>
-                <Category 
-                  onChange={this.handleCategoryChange} 
-                  value={this.state.filteredCategory}
-                  defaultText="All Category"
-                />
+          <section>
+            <FilterCategory app={this} />
+          </section>
+
+          <section>
+            {
+              this.state.isManagement ? <Management app={this} /> :
                 <Opportunities postingData={this.state.postings} />
-              </React.Fragment>
-          }
+            }
+          </section>
         </main>
-        
+
         <Footer />
       </div>
     );

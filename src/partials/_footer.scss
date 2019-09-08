@@ -1,3 +1,26 @@
+@import './variablesAndMixins';
+
+footer {
+    background-color: $black;
+    color: $white;
+}
+
 footer p {
     text-align: center;
+    padding-top: 1rem;
+}
+
+footer ul {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+footer li {
+    padding: 0.5rem 2rem 0.5rem;
+
+    a {
+        color: $white;
+        font-size: 2.5rem;
+    }
 }
