@@ -4,20 +4,81 @@ header {
     text-align: center;
     font-family: $headingFont;
     background-color: $primaryColor;
-    background-image: url('../assets/anna-earl-J-Jb1niw1j0-unsplash.jpg');
+    background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.3)), url('../assets/anna-earl-J-Jb1niw1j0-unsplash.jpg');
     background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
 
     height: 40vh;
 
-    h1 {
-        margin: 0;
-        padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    @include desktop {
+        height: 50vh;
     }
 }
 
-.plainHeader{
-    background-image: none;
-    height: 15vh;
+h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 4rem;
+    color: $white;
+    text-shadow: 2px 2px 3px $black;
+    -webkit-text-stroke: 1px $accent;
+
+    @include tablet {
+        font-size: 7rem;
+    }
+}
+
+// Post Opportunities/View Postings Button
+header input {
+    font-size: 2rem;
+    font-weight: bold;
+    border: 1px solid $secondaryColor;
+    padding: 1rem 1.5rem;
+    border-radius: 5px;
+    background: linear-gradient(to right, rgba(120,202,210,0.8), rgba(255,140,0,0.8));
+    margin-top: 2rem;
+    transition: all 400ms;
+
+    &:hover {
+        color: $white;
+        background: linear-gradient(to right, rgba(255,140,0,0.9), rgba(120,202,210,0.9));        
+    }
+
+    @include tablet {
+        width: 25rem;
+        font-size: 2.5rem;
+        padding: 1.3rem;
+    }
+}
+
+.photoCredit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    font-size: 1.2rem;
+    color: $white;
+}
+
+.managementHeader{
+    height: 30vh;
+
+    h1 {
+        font-size: 3.5rem;
+
+        @include tablet {
+            font-size: 6rem;
+        }
+    }
+
+    p {
+        display: none;
+    }
 }

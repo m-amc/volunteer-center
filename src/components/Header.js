@@ -29,9 +29,15 @@ const Header = ({app}) => {
     }
 
     return(
-        <header className={app.state.isManagement ? 'plainHeader' : ''}>
-            <h1>Volunteer Center</h1>
-            <button onClick={handleSubmit}>{app.state.headerButtonText}</button>
+        <header className={app.state.isManagement ? 'managementHeader' : ''}>
+            <div>
+                <h1>Volunteer Center</h1>
+                <input type="submit"
+                    value={app.state.headerButtonText}
+                    onClick={handleSubmit}
+                />
+            </div>
+            <p className="photoCredit">Photo by Anna Earl on Unsplash</p>
         </header>
     )
 }

@@ -5,7 +5,7 @@ html {
 }
 
 body {
-	font-size: 1.6rem;
+	font-size: 1.8rem;
     font-family: $bodyFont;
     background-color: $secondaryColor;
 }
@@ -28,8 +28,8 @@ li {
 	left: -1000px;
 	top: 0;
 	z-index: 999;
-	background: white;
-	color: white;
+	background: $secondaryColor;
+	color: $black;
 	text-decoration: none;
 	padding: 2rem;
 	text-transform: uppercase;
@@ -43,5 +43,13 @@ li {
 .wrapper {
 	width: 90%;
 	max-width: 1080px;
-    margin: 0 auto;
+	margin: 0 auto;
+	
+	@include tablet {
+		width: 70%;
+	}
+
+	@include desktop {
+		width: 90%;
+	}
 }

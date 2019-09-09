@@ -63,8 +63,11 @@ class App extends Component {
       newPostingData.push(filterPostingData[index])
     }
 
+    const isEmpty = newPostingData.length > 0 ? false : true
+
     this.setState({
       filteredCategory: event.target.value,
+      isNoResult: isEmpty,
       postings: newPostingData
     });
   }
@@ -80,7 +83,7 @@ class App extends Component {
       const endDate = new Date(postingObject[key].end_date);
       const category = postingObject[key].category;
 
-      // undefined is the value of the category filter on initial load. empty string when selected
+      // undefined is the value of the category filter on initial load. It's empty string when All Category is selected.
       if ((selectedCategory === undefined) || (selectedCategory === '')) {
         // Push to the filteredPostings object those postings that are ending today and in the future
         if (endDate >= this.today) {
@@ -101,20 +104,24 @@ class App extends Component {
 
     return (
       <div className="app">
+        <a href="#main" className="skip-link">Skip to main content.</a>
 
         <Header app={this} />
 
-        <main className="wrapper">
-          <section>
-            <FilterCategory app={this} />
-          </section>
-
+        <main id="main" className="wrapper">
           <section>
             {
-              this.state.isManagement ? <Management app={this} /> :
-                <Opportunities postingData={this.state.postings} />
+              this.state.isManagement ? <Management app={this} /> : 
+                <React.Fragment>
+                  <FilterCategory app={this} />
+                  <Opportunities postingData={this.state.postings} />
+                </React.Fragment>
             }
           </section>
+
+          <div className={this.state.isNoResult ? 'showNoResult' : 'hideNoResult'}>
+            <p>No opportunities for this category at this time</p>
+          </div>
         </main>
 
         <Footer />

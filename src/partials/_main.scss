@@ -1,4 +1,32 @@
-// This file holds all the styling done for both Opportunities and Management components
+// This file contains the styling for both Opportunities and Management components
+
+@import './variablesAndMixins';
+
+// Select dropdown style for both Opportunities and Management Components
+select {
+    font-size: 1.6rem;
+    font-family: sans-serif;
+    color: #444;
+    line-height: 1;
+    padding: .6em 1.4em .5em .8em;
+    width: 70%;
+    max-width: 100%;
+    border: 1px solid lightgray;
+    border-radius: .5em;
+    appearance: none;
+    background-color: #fff;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+        linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+    background-repeat: no-repeat, repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: .65em auto, 100%;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+
+    @include tablet {
+        width: 30rem;
+    }
+}
 
 // OPPORTUNITIES COMPONENT
 // Filter Category
@@ -9,38 +37,23 @@
         padding-right: 1rem;
         font-size: 2rem;
     }
-
-    select {
-        font-size: 1.6rem;
-        font-family: sans-serif;
-        font-weight: 700;
-        color: #444;
-        line-height: 1;
-        padding: .6em 1.4em .5em .8em;
-        width: 70%;
-        max-width: 100%;
-        border: 1px solid gray;
-        border-radius: .5em;
-        appearance: none;
-        background-color: #fff;
-        background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
-            linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
-        background-repeat: no-repeat, repeat;
-        background-position: right .7em top 50%, 0 0;
-        background-size: .65em auto, 100%;
-    }
 }
 
 // Listing
 main li {
-    // display: flex;
     border-top: 0.2rem solid gray;
     margin: 2rem 0;
+
+    @include desktop {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
 main li div {
-    // width: 50%;
-    // border: 1px solid tomato;
+    @include desktop {
+        width: 45%;
+    }
 }
 
 // Role and Organization
@@ -72,19 +85,137 @@ h2 {
     font-style: italic;
 }
 
-// .overflow {
-//     width: 100px;
-//     text-overflow: ellipsis;
-//     white-space: nowrap;
-//     overflow: hidden;
-// }
+// No Result Div
+.hideNoResult {
+    display: none;
+}
+
+.showNoResult {
+    display: block;
+    height: calc(100vh - 40vh);
+}
 
 // MANAGEMENT COMPONENT
-form label {
+form {
+    width: 100%;
+
+    label {
+        display: block;
+        padding-top: 1.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .fieldsetContainer {
+        @include desktop {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}
+
+form fieldset {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    margin: 3rem 0;
+    background-color: $primaryColor;
+
+    @include desktop {
+        width: 45%;
+    }
+}
+
+legend {
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    border: 1px solid $primaryColor;
+    box-shadow: 2px 2px 5px $black;
+    background: $secondaryColor;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+form input {
+    width: 100%;
+    height: 3rem;
+    font-size: 1.8rem;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+
+    &:focus {
+        border: 1px solid $accent;
+    }
+}
+
+.startEndDateContainer {
+    @include tablet {
+        display: flex;
+        justify-content: space-between;
+
+        .dateContainer {
+            width: 48%;
+        }
+    }
+}
+
+form button {
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+    border-radius: 10px;
+    padding: 1.5rem;
+    width: 50%;
     display: block;
+    margin: 0 auto;
+    color: $white;
+    border: 1px solid $primaryColor;
+    background: linear-gradient(to right, rgb(120,202,210), rgb(255,140,0));
+    transition: background 1s;
+
+    &:hover {
+        background: $accent;   
+    }
+
+    &:focus {
+        background: $accent;
+        border: 1px solid $accent;
+    }
+
+    @include desktop {
+        width: 35%;
+    }
 }
 
 .textArea {
     height: 10rem;
     width: 100%;
+    font-family: $bodyFont;
+    font-size: 1.8rem;
+
+    @include tablet {
+        height: 20rem;
+    }
+
+    @include desktop {
+        height: 25rem;
+    }
+}
+
+.react-datepicker {
+    font-size: 1.8rem !important;
+}
+
+.react-datepicker__current-month {
+    font-size: 1.8rem !important;
+}
+
+.react-datepicker__header {
+    padding-top: 6px !important;
+}
+
+.react-datepicker__navigation {
+    top: 16px !important;
+}
+
+.react-datepicker__day-name, .react-datepicker__day {
+    margin: 1rem !important;
 }
