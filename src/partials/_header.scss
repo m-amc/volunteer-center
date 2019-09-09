@@ -58,6 +58,7 @@ header input {
     }
 }
 
+// Header background image photo credit
 .photoCredit {
     position: absolute;
     bottom: 0;
@@ -67,6 +68,7 @@ header input {
     color: $white;
 }
 
+// These styles in the header will be applied if the user is in the Management mode
 .managementHeader{
     height: 30vh;
 

@@ -10,8 +10,6 @@ import '../fontawesome';
 import FilterCategory from './FilterCategory';
 import moment from 'moment';
 
-// !!!!! NOTE: REMEMBER TO REMOVE FIREBASE.JS IN GITIGNORE !!!!!!
-
 /*
 NOTE: The firebase volunteer-center database will (in the future) have a couple of objects in it.  For example, company.  For this project, I will only have 1 object but the structure is prepared to have multiple objects hence why the use of "child". I am planning to build more on top of the existing functionality after the bootcamp.
 */
@@ -29,7 +27,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("COMPONENTDIDMOUNT");
     const dbRef = this.dbRef;
 
     dbRef.on('value', (response) => {
@@ -103,8 +100,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("RENDER HERE");
-
     return (
       <div className="app">
         <a href="#main" className="skip-link">Skip to main content.</a>

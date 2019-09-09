@@ -1,5 +1,3 @@
-const today = new Date();
-
 const stateData =  {
     postings: [],
     id: '',
