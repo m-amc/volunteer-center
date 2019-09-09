@@ -4,7 +4,7 @@ header {
     text-align: center;
     font-family: $headingFont;
     background-color: $primaryColor;
-    background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.3)), url('../assets/anna-earl-J-Jb1niw1j0-unsplash.jpg');
+    background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2)), url('../assets/anna-earl-J-Jb1niw1j0-unsplash.jpg');
     background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
@@ -18,7 +18,7 @@ header {
     position: relative;
 
     @include desktop {
-        height: 50vh;
+        height: 60vh;
     }
 }
 
