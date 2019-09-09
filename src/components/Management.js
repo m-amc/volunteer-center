@@ -119,7 +119,7 @@ const Management = (props) => {
                         id="phone"
                         type="tel"
                         name="phone"
-                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                        pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                         onChange={handleChange}
                         value={appState.phone}
                         placeholder="416-xxx-xxxx"
