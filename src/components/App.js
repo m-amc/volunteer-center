@@ -8,6 +8,7 @@ import Footer from './Footer';
 import '.././partials/App.scss';
 import '../fontawesome';
 import FilterCategory from './FilterCategory';
+import moment from 'moment';
 
 // !!!!! NOTE: REMEMBER TO REMOVE FIREBASE.JS IN GITIGNORE !!!!!!
 
@@ -79,18 +80,20 @@ class App extends Component {
 
     // eslint-disable-next-line
     for (let key in postingObject) {
-      // Convert the stored postings end_date to date first
-      const endDate = new Date(postingObject[key].end_date);
+      // use momentjs to correctly parse the date string
+      const momentEndDate = moment(postingObject[key].end_date);
+      const momentToday = moment(this.today.toLocaleDateString());
+
       const category = postingObject[key].category;
 
       // undefined is the value of the category filter on initial load. It's empty string when All Category is selected.
       if ((selectedCategory === undefined) || (selectedCategory === '')) {
         // Push to the filteredPostings object those postings that are ending today and in the future
-        if (endDate >= this.today) {
+        if (momentEndDate >= momentToday) {
           filteredPostings[key] = postingObject[key];
         }
       } else {
-        if (endDate >= this.today && category === selectedCategory) {
+        if (momentEndDate >= momentToday && category === selectedCategory) {
           filteredPostings[key] = postingObject[key];
         }
       }
