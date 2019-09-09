@@ -119,8 +119,22 @@ form fieldset {
     margin: 3rem 0;
     background-color: $primaryColor;
 
+    .fieldsContainer {
+        padding: 0.5rem;
+    }
+
+    @include tablet {
+        .fieldsContainer {
+            padding: 1rem 1.5rem;
+        }
+    }
+
     @include desktop {
         width: 45%;
+
+        .fieldsContainer {
+            padding: 1rem;
+        }
     }
 }
 
