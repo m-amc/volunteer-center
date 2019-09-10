@@ -70,16 +70,16 @@ const Management = (props) => {
         <form action="" onSubmit={handleSubmit}>
             <div className="fieldsetContainer">
                 <fieldset>
-                    <legend>Company Information</legend>
+                    <legend>Organization Information</legend>
                     <div className="fieldsContainer">    
-                        <label htmlFor="organization">Organization Name</label>
+                        <label htmlFor="organization">Name</label>
                         <input
                             id="organization"
                             type="text"
                             name="organization"
                             onChange={handleChange}
                             value={appState.organization}
-                            placeholder="Company ABC"
+                            placeholder="Animal Shelter"
                             size="30"
                             required
                         />
@@ -134,7 +134,7 @@ const Management = (props) => {
                             name="website"
                             onChange={handleChange}
                             value={appState.website}
-                            placeholder="http://yourcompany.com"
+                            placeholder="https://organization.com"
                         />
     
                         <label htmlFor="email">Email</label>
@@ -153,7 +153,7 @@ const Management = (props) => {
                 <fieldset>
                     <legend>About the Role</legend>
                     <div className="fieldsContainer">    
-                        <label htmlFor="Category">Category</label>
+                        <label htmlFor="category">Category</label>
                         <Category
                             name="category"
                             id="category"
@@ -171,6 +171,7 @@ const Management = (props) => {
                             name="role"
                             onChange={handleChange}
                             value={appState.role}
+                            placeholder="Dog Walker"
                             required
                         />
     

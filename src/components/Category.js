@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 const Category = (props) => {
     return (        
         <select
+            id={props.id}
             name={props.name}
             onChange={props.onChange}
             value={props.value}
@@ -11,8 +12,13 @@ const Category = (props) => {
             <option value="">{props.defaultText}</option>
             <option value="community">Community</option>
             <option value="education">Education</option>
+            <option value="forestry">Forestry</option>
             <option value="healthcare">Health Care</option>
+            <option value="office">Office</option>
             <option value="animals">Pets/Animals</option>
+            <option value="retail">Retail</option>
+            <option value="sports">Sports/Recreation</option>
+            <option value="tourism">Tourism</option>
         </select>
     )
 }
