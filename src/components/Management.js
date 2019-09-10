@@ -12,6 +12,9 @@ const Management = (props) => {
         appState = props.app.state,
         app = props.app;
 
+    // To automatically set the focus to the first input field after submit
+    const organizationInput = React.createRef();
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -57,6 +60,8 @@ const Management = (props) => {
             created: Date.now()
         })
 
+        organizationInput.current.focus();
+
         successful();
     }
 
@@ -81,6 +86,7 @@ const Management = (props) => {
                             value={appState.organization}
                             placeholder="Animal Shelter"
                             size="30"
+                            ref={organizationInput}
                             required
                         />
     
