@@ -6,12 +6,20 @@ $accent: #FF8C00;
 $black: #101113ef;
 $white: #FFFFF0;
 
+@mixin phone {
+    @media (min-width: 360px) { @content; }
+}
+
 @mixin tablet {
     @media (min-width: 768px) { @content; }
 }
 
 @mixin desktop {
     @media (min-width: 1024px) { @content; }
+}
+
+@mixin desktopBigger {
+    @media (min-width: 1280px) { @content; }
 }
 
 @mixin bigDesktop {
