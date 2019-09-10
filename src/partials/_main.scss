@@ -64,6 +64,14 @@ main li div {
     }
 }
 
+main a {
+    text-decoration: none;
+    color: $black;
+    &:hover {
+        color: $accent;
+    }
+}
+
 // Role and Organization
 h2,h3 {
     margin-bottom: 0;

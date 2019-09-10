@@ -32,7 +32,7 @@ const Management = (props) => {
             address: appState.address,
             state: 'ON',
             city: 'Toronto',
-            phone: appState.phone,
+            phone: appState.phone.replace(/-/g,''),
             website: appState.website,
             email: appState.email,
             category: appState.category,
@@ -126,10 +126,11 @@ const Management = (props) => {
                             id="phone"
                             type="tel"
                             name="phone"
-                            pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"
+                            pattern="[\d]{3}-?[\d]{3}-?[\d]{4}"
                             onChange={handleChange}
                             value={appState.phone}
-                            placeholder="416-xxx-xxxx"
+                            placeholder="416-123-456"
+                            title="Format: 416-123-456 or 416123456"
                             required
                         />
     
