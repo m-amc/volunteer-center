@@ -100,5 +100,10 @@ header input {
         @include tablet {
             font-size: 6rem;
         }
+
+        @include desktopBigger {
+            font-size: 10rem;
+            -webkit-text-stroke-width: 3px;
+        }
     }
 }
