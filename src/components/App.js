@@ -9,6 +9,7 @@ import '.././partials/App.scss';
 import '../fontawesome';
 import FilterCategory from './FilterCategory';
 import moment from 'moment';
+import Metas from './Metas';
 
 /*
 NOTE: The firebase volunteer-center database will (in the future) have a couple more objects in it.  For example, users and company.  For this project, I will only have 1 object but the structure is prepared to have multiple objects hence why the use of "child". I am planning to build more on top of the existing functionality after the bootcamp.
@@ -102,6 +103,8 @@ class App extends Component {
   render() {
     return (
       <div className="app">
+        <Metas />
+
         <a href="#main" className="skip-link">Skip to main content.</a>
 
         <Header app={this} />
