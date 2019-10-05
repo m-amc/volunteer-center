@@ -1,14 +1,5 @@
 import firebase from 'firebase';
 
-// apiKey: "AIzaSyDYZS3jKKLuglNpC9dcc6-iEdvUItaHi0A",
-    // authDomain: "volunteer-center.firebaseapp.com",
-    // databaseURL: "https://volunteer-center.firebaseio.com",
-    // projectId: "volunteer-center",
-    // storageBucket: "",
-    // messagingSenderId: "893009596874",
-    // appId: "1:893009596874:web:84684da9c2ec072d5eff33"
-
-
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
