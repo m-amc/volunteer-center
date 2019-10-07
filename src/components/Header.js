@@ -1,5 +1,6 @@
 import React from 'react';
 import '../partials/_header.scss';
+import NavBar from '../components/NavBar';
 
 const Header = ({app}) => {
     const handleSubmit = (event) => {
@@ -30,6 +31,7 @@ const Header = ({app}) => {
 
     return(
         <header className={app.state.isManagement ? 'managementHeader' : ''}>
+            <NavBar />
             <div>
                 <h1>Volunteer Center</h1>
                 <input type="submit"
