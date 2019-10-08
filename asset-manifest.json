@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/volunteer-center/static/css/main.bace18b6.chunk.css",
-    "main.js": "/volunteer-center/static/js/main.e49d73b4.chunk.js",
-    "main.js.map": "/volunteer-center/static/js/main.e49d73b4.chunk.js.map",
+    "main.css": "/volunteer-center/static/css/main.ecb9c828.chunk.css",
+    "main.js": "/volunteer-center/static/js/main.59255624.chunk.js",
+    "main.js.map": "/volunteer-center/static/js/main.59255624.chunk.js.map",
     "runtime~main.js": "/volunteer-center/static/js/runtime~main.586029e4.js",
     "runtime~main.js.map": "/volunteer-center/static/js/runtime~main.586029e4.js.map",
     "static/css/2.c1dba388.chunk.css": "/volunteer-center/static/css/2.c1dba388.chunk.css",
-    "static/js/2.9c6b9c80.chunk.js": "/volunteer-center/static/js/2.9c6b9c80.chunk.js",
-    "static/js/2.9c6b9c80.chunk.js.map": "/volunteer-center/static/js/2.9c6b9c80.chunk.js.map",
+    "static/js/2.2188418b.chunk.js": "/volunteer-center/static/js/2.2188418b.chunk.js",
+    "static/js/2.2188418b.chunk.js.map": "/volunteer-center/static/js/2.2188418b.chunk.js.map",
     "index.html": "/volunteer-center/index.html",
-    "precache-manifest.4c3653860f1c43b37f655c2130ae09c9.js": "/volunteer-center/precache-manifest.4c3653860f1c43b37f655c2130ae09c9.js",
+    "precache-manifest.5e9cf2359ed968461d8ae5fa0782ca52.js": "/volunteer-center/precache-manifest.5e9cf2359ed968461d8ae5fa0782ca52.js",
     "service-worker.js": "/volunteer-center/service-worker.js",
     "static/css/2.c1dba388.chunk.css.map": "/volunteer-center/static/css/2.c1dba388.chunk.css.map",
-    "static/css/main.bace18b6.chunk.css.map": "/volunteer-center/static/css/main.bace18b6.chunk.css.map",
+    "static/css/main.ecb9c828.chunk.css.map": "/volunteer-center/static/css/main.ecb9c828.chunk.css.map",
     "static/media/App.scss": "/volunteer-center/static/media/anna-earl-J-Jb1niw1j0-unsplash.3dfd807c.jpg"
   }
 }
