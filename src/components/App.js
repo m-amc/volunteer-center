@@ -10,6 +10,8 @@ import '../fontawesome';
 import FilterCategory from './FilterCategory';
 import moment from 'moment';
 import Metas from './Metas';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
 
 /*
 NOTE: The firebase volunteer-center database will (in the future) have a couple more objects in it.  For example, users and company.  For this project, I will only have 1 object but the structure is prepared to have multiple objects hence why the use of "child". I am planning to build more on top of the existing functionality after the bootcamp.
@@ -107,23 +109,31 @@ class App extends Component {
 
         <a href="#main" className="skip-link">Skip to main content.</a>
 
-        <Header app={this} />
+        <Router>
+          <Header app={this} />
 
-        <main id="main" className="wrapper">
-          <section>
-            {
-              this.state.isManagement ? <Management app={this} /> : 
-                <React.Fragment>
-                  <FilterCategory app={this} />
-                  <Opportunities postingData={this.state.postings} />
-                </React.Fragment>
-            }
-          </section>
+          <main id="main" className="wrapper">
+            <section>
+              <Switch>
+                <Route exact path="/" render={() =>
+                  <React.Fragment>
+                    <FilterCategory app={this} />
+                    <Opportunities postingData={this.state.postings} />
+                  </React.Fragment>
+                } />
 
-          <div className={this.state.isNoResult ? 'showNoResult' : 'hideNoResult'}>
-            <p>No opportunities for this category at this time</p>
-          </div>
-        </main>
+                <PrivateRoute path="/employer"
+                  render={(routeProps) =>
+                    <Management {...routeProps} app={this} />
+                  }/>
+                </Switch>
+            </section>
+
+            <div className={this.state.isNoResult ? 'showNoResult' : 'hideNoResult'}>
+              <p>No opportunities for this category at this time</p>
+            </div>
+          </main>
+        </Router>
 
         <Footer />
       </div>

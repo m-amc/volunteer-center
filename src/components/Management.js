@@ -1,5 +1,5 @@
 // import React from 'react';
-import React, { useEffect } from "react";
+import React from "react";
 
 import Category from './Category';
 import PropTypes from 'prop-types';
@@ -8,34 +8,8 @@ import DatePicker from "react-datepicker";
 import successful, { dateRangeError } from '../alerts'
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-import { useAuth0 } from "../react-auth0-wrapper";
-
 
 const Management = (props) => {
-    // Authentication check
-    /* Source: Auth0 documentation
-    This makes use of the useEffect hook to redirect to the user to the login page if they are not yet authenticated.
-
-    If the user is authenticated, the redirect will not take place 
-    */
-
-    const { loading, isAuthenticated, loginWithRedirect } = useAuth0();
-
-    const path = "/";
-
-    useEffect(() => {
-        if (loading || isAuthenticated) {
-            return;
-        }
-        const fn = async () => {
-            await loginWithRedirect({
-                appState: { targetUrl: path }
-            });
-        };
-        fn();
-    }, [loading, isAuthenticated, loginWithRedirect, path]);
-    // Authentication check ends
-
     const dbRef = props.app.dbRef.child('posting'),
         appState = props.app.state,
         app = props.app;
@@ -105,7 +79,7 @@ const Management = (props) => {
                 <fieldset>
                     <legend>Organization Information</legend>
                     <div className="fieldsContainer">
-                        <label htmlFor="organization">Name</label>
+                        <label htmlFor="organization">Name <span>*</span></label>
                         <input
                             id="organization"
                             type="text"
@@ -118,7 +92,7 @@ const Management = (props) => {
                             required
                         />
 
-                        <label htmlFor="address">Address</label>
+                        <label htmlFor="address">Address <span>*</span></label>
                         <input
                             id="address"
                             type="text"
@@ -149,7 +123,7 @@ const Management = (props) => {
                             disabled
                         />
 
-                        <label htmlFor="phone">Phone</label>
+                        <label htmlFor="phone">Phone <span>*</span></label>
                         <input
                             id="phone"
                             type="tel"
@@ -188,7 +162,7 @@ const Management = (props) => {
                 <fieldset>
                     <legend>About the Role</legend>
                     <div className="fieldsContainer">
-                        <label htmlFor="category">Category</label>
+                        <label htmlFor="category">Category <span>*</span></label>
                         <Category
                             name="category"
                             id="category"
@@ -199,7 +173,7 @@ const Management = (props) => {
                             defaultText="Select Category"
                         />
 
-                        <label htmlFor="role">Role</label>
+                        <label htmlFor="role">Role <span>*</span></label>
                         <input
                             id="role"
                             type="text"
@@ -210,7 +184,7 @@ const Management = (props) => {
                             required
                         />
 
-                        <label htmlFor="roleDescription">Description</label>
+                        <label htmlFor="roleDescription">Description <span>*</span></label>
                         <textarea
                             className="textArea"
                             maxLength="500"
@@ -246,6 +220,7 @@ const Management = (props) => {
                 </fieldset>
             </div>
             <button className="formSubmit">SUBMIT</button>
+            <p><span>*</span> required fields</p>
         </form>
     )
 }
