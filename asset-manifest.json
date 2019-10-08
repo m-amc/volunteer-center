@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/volunteer-center/static/css/main.767f9481.chunk.css",
-    "main.js": "/volunteer-center/static/js/main.6b48694d.chunk.js",
-    "main.js.map": "/volunteer-center/static/js/main.6b48694d.chunk.js.map",
+    "main.css": "/volunteer-center/static/css/main.10d88d87.chunk.css",
+    "main.js": "/volunteer-center/static/js/main.0e68a91f.chunk.js",
+    "main.js.map": "/volunteer-center/static/js/main.0e68a91f.chunk.js.map",
     "runtime~main.js": "/volunteer-center/static/js/runtime~main.586029e4.js",
     "runtime~main.js.map": "/volunteer-center/static/js/runtime~main.586029e4.js.map",
-    "static/css/2.d4197120.chunk.css": "/volunteer-center/static/css/2.d4197120.chunk.css",
-    "static/js/2.b3f1ae6e.chunk.js": "/volunteer-center/static/js/2.b3f1ae6e.chunk.js",
-    "static/js/2.b3f1ae6e.chunk.js.map": "/volunteer-center/static/js/2.b3f1ae6e.chunk.js.map",
+    "static/css/2.c1dba388.chunk.css": "/volunteer-center/static/css/2.c1dba388.chunk.css",
+    "static/js/2.8ea34894.chunk.js": "/volunteer-center/static/js/2.8ea34894.chunk.js",
+    "static/js/2.8ea34894.chunk.js.map": "/volunteer-center/static/js/2.8ea34894.chunk.js.map",
     "index.html": "/volunteer-center/index.html",
-    "precache-manifest.fd840163cf741290788d20d35588fa4f.js": "/volunteer-center/precache-manifest.fd840163cf741290788d20d35588fa4f.js",
+    "precache-manifest.5b721f463e2b34db5c9a7611189ec19e.js": "/volunteer-center/precache-manifest.5b721f463e2b34db5c9a7611189ec19e.js",
     "service-worker.js": "/volunteer-center/service-worker.js",
-    "static/css/2.d4197120.chunk.css.map": "/volunteer-center/static/css/2.d4197120.chunk.css.map",
-    "static/css/main.767f9481.chunk.css.map": "/volunteer-center/static/css/main.767f9481.chunk.css.map",
+    "static/css/2.c1dba388.chunk.css.map": "/volunteer-center/static/css/2.c1dba388.chunk.css.map",
+    "static/css/main.10d88d87.chunk.css.map": "/volunteer-center/static/css/main.10d88d87.chunk.css.map",
     "static/media/App.scss": "/volunteer-center/static/media/anna-earl-J-Jb1niw1j0-unsplash.3dfd807c.jpg"
   }
 }
