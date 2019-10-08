@@ -21,7 +21,3 @@ $white: #FFFFF0;
 @mixin desktopBigger {
     @media (min-width: 1280px) { @content; }
 }
-
-@mixin bigDesktop {
-    @media (min-width: 1280) { @content; }
-}

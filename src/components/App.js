@@ -122,7 +122,7 @@ class App extends Component {
                   </React.Fragment>
                 } />
 
-                <PrivateRoute path="/employer"
+                <PrivateRoute path="/organization"
                   render={(routeProps) =>
                     <Management {...routeProps} app={this} />
                   }/>

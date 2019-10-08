@@ -23,7 +23,7 @@ const Header = ({app}) => {
             
             <h1>Volunteer Center</h1>
             <Link 
-                to={app.state.isManagement ? "/" : "/employer"} className="postingLink" onClick={handleSubmit}>{app.state.isManagement ? "View Opportunities" : "Post Opportunities"}
+                to={app.state.isManagement ? "/" : "/organization"} className="postingLink" onClick={handleSubmit}>{app.state.isManagement ? "View Opportunities" : "Post Opportunities"}
             </Link>
 
             <p className="photoCredit">Photo by Anna Earl on Unsplash</p>
