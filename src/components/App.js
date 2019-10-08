@@ -11,7 +11,7 @@ import FilterCategory from './FilterCategory';
 import moment from 'moment';
 import Metas from './Metas';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import PrivateRoute from './PrivateRoute';
+// import PrivateRoute from './PrivateRoute';
 
 /*
 NOTE: The firebase volunteer-center database will (in the future) have a couple more objects in it.  For example, users and company.  For this project, I will only have 1 object but the structure is prepared to have multiple objects hence why the use of "child". I am planning to build more on top of the existing functionality after the bootcamp.
@@ -122,7 +122,7 @@ class App extends Component {
                   </React.Fragment>
                 } />
 
-                <PrivateRoute path="/organization"
+                <Route path="/organization"
                   render={(routeProps) =>
                     <Management {...routeProps} app={this} />
                   }/>
