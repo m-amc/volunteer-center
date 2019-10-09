@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "22a16e784a2eb5e66925061dd7ad81c3",
+    "revision": "8fe903353b5e999b97bb0daf485c0e9f",
     "url": "/volunteer-center/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/volunteer-center/static/css/2.d4197120.chunk.css"
   },
   {
-    "revision": "0c380a56cc4bac8b7c94",
+    "revision": "b477914167d18a1c3a28",
     "url": "/volunteer-center/static/css/main.87fd2880.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/volunteer-center/static/js/2.5504e11a.chunk.js"
   },
   {
-    "revision": "0c380a56cc4bac8b7c94",
-    "url": "/volunteer-center/static/js/main.019387d3.chunk.js"
+    "revision": "b477914167d18a1c3a28",
+    "url": "/volunteer-center/static/js/main.275e532f.chunk.js"
   },
   {
     "revision": "63308de1a067e280479b",
