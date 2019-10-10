@@ -12,14 +12,13 @@ header {
     height: 30vh;
 
     display: flex;
-    // flex-direction: column;
     justify-content: center;
     align-items: center;
 
     position: relative;
 
     @include desktop {
-        height: 60vh;
+        height: 40vh;
     }
 }
 

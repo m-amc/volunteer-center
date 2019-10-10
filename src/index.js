@@ -4,16 +4,15 @@ import './index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import { Auth0Provider } from "./react-auth0-wrapper";
-import config from "./auth_config.json";
+import config from './auth_config.json';
+import history from './utils/history';
 
 // A function that routes the user to the right place
 // after login
 const onRedirectCallback = appState => {
-    window.history.replaceState(
-        {},
-        document.title,
-        appState.targetUrl && appState
-            ? "volunteer-center"+appState.targetUrl
+    history.push(
+        appState && appState.targetUrl
+            ? "/volunteer-center"+ appState.targetUrl
             : window.location.pathname
     );
 };
