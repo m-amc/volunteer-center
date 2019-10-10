@@ -1,11 +1,9 @@
-// import React from 'react';
 import React from "react";
-
 import Category from './Category';
 import PropTypes from 'prop-types';
 import '../partials/_main.scss';
 import DatePicker from "react-datepicker";
-import successful, { dateRangeError } from '../alerts'
+import successful, { dateRangeError } from '../utils/alerts'
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
