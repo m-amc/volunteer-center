@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/volunteer-center/static/css/main.3b2681db.chunk.css",
-    "main.js": "/volunteer-center/static/js/main.742f8176.chunk.js",
-    "main.js.map": "/volunteer-center/static/js/main.742f8176.chunk.js.map",
+    "main.js": "/volunteer-center/static/js/main.431f0f9a.chunk.js",
+    "main.js.map": "/volunteer-center/static/js/main.431f0f9a.chunk.js.map",
     "runtime~main.js": "/volunteer-center/static/js/runtime~main.586029e4.js",
     "runtime~main.js.map": "/volunteer-center/static/js/runtime~main.586029e4.js.map",
     "static/css/2.c1dba388.chunk.css": "/volunteer-center/static/css/2.c1dba388.chunk.css",
     "static/js/2.619365b7.chunk.js": "/volunteer-center/static/js/2.619365b7.chunk.js",
     "static/js/2.619365b7.chunk.js.map": "/volunteer-center/static/js/2.619365b7.chunk.js.map",
     "index.html": "/volunteer-center/index.html",
-    "precache-manifest.e7176fe3a72b1413b565e4b74dce659d.js": "/volunteer-center/precache-manifest.e7176fe3a72b1413b565e4b74dce659d.js",
+    "precache-manifest.c742edd8a68fefbf10d50bc936057dcd.js": "/volunteer-center/precache-manifest.c742edd8a68fefbf10d50bc936057dcd.js",
     "service-worker.js": "/volunteer-center/service-worker.js",
     "static/css/2.c1dba388.chunk.css.map": "/volunteer-center/static/css/2.c1dba388.chunk.css.map",
     "static/css/main.3b2681db.chunk.css.map": "/volunteer-center/static/css/main.3b2681db.chunk.css.map",
