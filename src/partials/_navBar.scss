@@ -15,7 +15,7 @@
 }
 
 .logoContainer {
-    width: 30%;
+    width: 20%;
     padding: 0.2rem 0;
 
     img {
@@ -49,7 +49,7 @@
 }
 
 .mainNav button {
-    font-size: 2rem;
+    font-size: 1.7rem;
     padding: 0.3rem;
     background-color: transparent;
     color: $white;
@@ -69,11 +69,11 @@
 }
 
 .posting {
+    font-size: 1.7rem;
     text-decoration: none;
     text-transform: lowercase;
     color: $white;
     border: 1px solid transparent;
-    font-size: 2rem;
     text-align: center;
 
     @include tablet {

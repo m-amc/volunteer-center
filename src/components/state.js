@@ -14,7 +14,6 @@ const stateData =  {
     start_date: new Date(),
     end_date: new Date(),
     created: Date.now(),
-    isManagement: false,
     isNoResult: false,
     headerButtonText: 'Post Opportunities',
     filteredCategory: ''

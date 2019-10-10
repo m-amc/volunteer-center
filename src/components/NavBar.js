@@ -1,39 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth0 } from "../react-auth0-wrapper";
 import '../partials/_navBar.scss';
 import { Link } from 'react-router-dom';
 import logo from '../assets/vc-logo.png';
 
-const NavBar = ({app}) => {
-    const handleSubmit = () => {
-        /* 
-        isManagement state is false if it's in the Listings view. onClick will set isManagement to true and the button will change text to View Listing.  
-        isManagement state is true if it's in the Management view. onClick will set isManagement to false and the button will change text to Post Opportunities
-        */
-
-        const status = !app.state.isManagement;
-
-
-        app.setState({
-            isManagement: status
-        })
-    }
-
+const NavBar = () => {
+    // check if user is authenticated
     const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
-    console.log(app.state.isManagement);
+
+    // useState hook will be updated when the user clicks Post Job or View Job
+    const [isManagement, setManagementLinkState] = useState(false);
+
+    // Whenever the DOM is updated and the url path is in the organization component, it will change the isManagement state
+    useEffect(() => {
+        console.log(window.location.pathname);
+        if(window.location.pathname === "/volunteer-center/organization") {
+            setManagementLinkState(true);
+        } else {
+            setManagementLinkState(false);
+        }
+    }, [])
+
     return (
         <div className="navContainer">
             <div className="logoMainNav wrapper">
                 <div className="logoContainer">
-                	<img src={logo} alt=""/>
+                    <img src={logo} alt=""/>
                 </div>
                 <nav className="mainNav">
                     <ul>
                     {
-                        app.state.isManagement ? 
+                        isManagement ? 
                         <li>
                             <Link to="/" 
-                                onClick={handleSubmit}
+                                onClick={() => setManagementLinkState(false)}
                                 className="posting">
                                     View Jobs
                             </Link>
@@ -43,7 +43,7 @@ const NavBar = ({app}) => {
 
                         <li>
                             <Link to="/organization" 
-                                onClick={handleSubmit}
+                                onClick={() => setManagementLinkState(true)}
                                 className="posting">
                                     Post Job
                             </Link>
