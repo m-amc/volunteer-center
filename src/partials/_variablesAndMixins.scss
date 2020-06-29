@@ -1,23 +1,31 @@
-$headingFont: 'Raleway', sans-serif;
-$bodyFont: 'Roboto', sans-serif;
+$headingFont: "Raleway", sans-serif;
+$bodyFont: "Roboto", sans-serif;
 $primaryColor: #78cad2;
-$secondaryColor:#CAF5EF;
-$accent: #FF8C00;
+$secondaryColor: #caf5ef;
+$accent: #ff8c00;
 $black: #101113ef;
-$white: #FFFFF0;
+$white: #fffff0;
 
 @mixin phone {
-    @media (min-width: 360px) { @content; }
+	@media (min-width: 360px) {
+		@content;
+	}
 }
 
 @mixin tablet {
-    @media (min-width: 768px) { @content; }
+	@media (min-width: 768px) {
+		@content;
+	}
 }
 
 @mixin desktop {
-    @media (min-width: 1024px) { @content; }
+	@media (min-width: 1024px) {
+		@content;
+	}
 }
 
 @mixin desktopBigger {
-    @media (min-width: 1280px) { @content; }
+	@media (min-width: 1280px) {
+		@content;
+	}
 }

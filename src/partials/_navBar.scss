@@ -1,88 +1,88 @@
-@import './variablesAndMixins.scss';
+@import "./variablesAndMixins.scss";
 
 .logo {
-    width: 200px;
-    height: 200px;
+	width: 200px;
+	height: 200px;
 }
-.navContainer{
-    background-color: rgba(0, 0, 0, 0.7);
+.navContainer {
+	background-color: rgba(0, 0, 0, 0.7);
 }
 
 .logoMainNav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .logoContainer {
-    width: 20%;
-    padding: 0.2rem 0;
+	width: 20%;
+	padding: 0.2rem 0;
 
-    img {
-        display: block;
-        width: 50px;
-        height: 50px;
+	img {
+		display: block;
+		width: 50px;
+		height: 50px;
 
-        @include tablet {
-            width: 80px;
-            height: 80px;
-        }
+		@include tablet {
+			width: 80px;
+			height: 80px;
+		}
 
-        @include desktop {
-            width: 100px;
-            height: 100px;
-        }
-    }
+		@include desktop {
+			width: 100px;
+			height: 100px;
+		}
+	}
 }
 
 .mainNav ul {
-    margin: 0;
-    display: flex;
-    justify-content: flex-end;
+	margin: 0;
+	display: flex;
+	justify-content: flex-end;
 }
 
 .mainNav ul li {
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	padding: 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .mainNav button {
-    font-size: 1.7rem;
-    padding: 0.3rem;
-    background-color: transparent;
-    color: $white;
-    padding: 0.5rem 1rem;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    text-transform: lowercase;
-    display: flex;
+	font-size: 1.7rem;
+	padding: 0.3rem;
+	background-color: transparent;
+	color: $white;
+	padding: 0.5rem 1rem;
+	border: 1px solid transparent;
+	border-radius: 5px;
+	text-transform: lowercase;
+	display: flex;
 
-    @include tablet {
-        font-size: 2.5rem;
-    }
+	@include tablet {
+		font-size: 2.5rem;
+	}
 
-    &:hover {
-        border: 1px solid $accent;
-    }
+	&:hover {
+		border: 1px solid $accent;
+	}
 }
 
 .posting {
-    font-size: 1.7rem;
-    text-decoration: none;
-    text-transform: lowercase;
-    color: $white;
-    border: 1px solid transparent;
-    text-align: center;
+	font-size: 1.7rem;
+	text-decoration: none;
+	text-transform: lowercase;
+	color: $white;
+	border: 1px solid transparent;
+	text-align: center;
 
-    @include tablet {
-        padding: 0.5rem 1rem;
-        font-size: 2.5rem;
-    }
+	@include tablet {
+		padding: 0.5rem 1rem;
+		font-size: 2.5rem;
+	}
 
-    &:hover {
-        border: 1px solid $accent;
-        border-radius: 5px;
-    }
+	&:hover {
+		border: 1px solid $accent;
+		border-radius: 5px;
+	}
 }

@@ -1,79 +1,84 @@
-@import './variablesAndMixins.scss';
+@import "./variablesAndMixins.scss";
 
 header {
-    text-align: center;
-    font-family: $headingFont;
-    background-color: $primaryColor;
-    background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2)), url('../assets/anna-earl-J-Jb1niw1j0-unsplash.jpg');
-    background-repeat: no-repeat;
+	text-align: center;
+	font-family: $headingFont;
+	background-color: $primaryColor;
+	background-image: linear-gradient(
+			to bottom right,
+			rgba(255, 255, 255, 0.1),
+			rgba(255, 255, 255, 0.2)
+		),
+		url("../assets/anna-earl-J-Jb1niw1j0-unsplash.jpg");
+	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
 
-    height: 30vh;
+	height: 30vh;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-    position: relative;
+	position: relative;
 
-    @include desktop {
-        height: 40vh;
-    }
+	@include desktop {
+		height: 40vh;
+	}
 }
 
 h1 {
-    margin: 0;
-    padding: 0;
-    font-size: 4.2rem;
-    color: $white;
-    text-shadow: 3px 3px 5px $black;
-    -webkit-text-stroke: 1px $accent;
-    -webkit-text-stroke-width: 1px;
+	margin: 0;
+	padding: 0;
+	font-size: 4.2rem;
+	color: $white;
+	text-shadow: 3px 3px 5px $black;
+	-webkit-text-stroke: 1px $accent;
+	-webkit-text-stroke-width: 1px;
 
-    @include phone {
-        font-size: 5rem;
-    }
+	@include phone {
+		font-size: 5rem;
+	}
 
-    @include tablet {
-        font-size: 7.5rem;
-        -webkit-text-stroke-width: 2px;
-    }
+	@include tablet {
+		font-size: 7.5rem;
+		-webkit-text-stroke-width: 2px;
+	}
 
-    @include desktopBigger {
-        font-size: 10rem;
-        -webkit-text-stroke-width: 3px;
-    }
+	@include desktopBigger {
+		font-size: 10rem;
+		-webkit-text-stroke-width: 3px;
+	}
 }
 
 // Header background image photo credit
 .photoCredit {
-    position: absolute;
-    bottom: 0;
-    right: 1rem;
-    margin: 0;
-    font-size: 1.3rem;
-    color: $white;
+	position: absolute;
+	bottom: 0;
+	right: 1rem;
+	margin: 0;
+	font-size: 1.3rem;
+	color: $white;
 
-    @include tablet {
-        font-size: 1.6rem;
-    }
+	@include tablet {
+		font-size: 1.6rem;
+	}
 }
 
 // These styles in the header will be applied if the user is in the Management mode
-.managementHeader{
-    height: 35vh;
+.managementHeader {
+	height: 35vh;
 
-    h1 {
-        font-size: 3.5rem;
+	h1 {
+		font-size: 3.5rem;
 
-        @include tablet {
-            font-size: 6rem;
-        }
+		@include tablet {
+			font-size: 6rem;
+		}
 
-        @include desktopBigger {
-            font-size: 10rem;
-            -webkit-text-stroke-width: 3px;
-        }
-    }
+		@include desktopBigger {
+			font-size: 10rem;
+			-webkit-text-stroke-width: 3px;
+		}
+	}
 }

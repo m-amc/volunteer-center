@@ -1,4 +1,4 @@
-@import './variablesAndMixins';
+@import "./variablesAndMixins";
 
 html {
 	font-size: 62.5%;
@@ -6,8 +6,8 @@ html {
 
 body {
 	font-size: 1.8rem;
-    font-family: $bodyFont;
-    background-color: $secondaryColor;
+	font-family: $bodyFont;
+	background-color: $secondaryColor;
 }
 
 img {
@@ -20,7 +20,7 @@ ul {
 
 li {
 	list-style: none;
-    padding: 0;
+	padding: 0;
 }
 
 .skip-link {
@@ -44,7 +44,7 @@ li {
 	width: 90%;
 	max-width: 1080px;
 	margin: 0 auto;
-	
+
 	@include tablet {
 		width: 70%;
 	}

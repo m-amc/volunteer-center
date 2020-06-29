@@ -1,37 +1,37 @@
-@import './variablesAndMixins';
+@import "./variablesAndMixins";
 
 footer {
-    background-color: $black;
-    color: $white;
-    height: 10rem;
-    margin-top: 3rem;
+	background-color: $black;
+	color: $white;
+	height: 10rem;
+	margin-top: 3rem;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 footer p {
-    text-align: center;
-    margin: 0;
+	text-align: center;
+	margin: 0;
 }
 
 footer ul {
-    display: flex;
-    justify-content: center;
-    padding: 0;
-    margin: 0;
+	display: flex;
+	justify-content: center;
+	padding: 0;
+	margin: 0;
 }
 
 footer li {
-    padding: 0.5rem 2rem 0.5rem;
+	padding: 0.5rem 2rem 0.5rem;
 
-    a {
-        color: $white;
-        font-size: 2.8rem;
-    }
+	a {
+		color: $white;
+		font-size: 2.8rem;
+	}
 
-    a:hover {
-        color: $accent;
-    }
+	a:hover {
+		color: $accent;
+	}
 }
