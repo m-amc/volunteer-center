@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const Category = (props) => (
+export const Category = props => (
   <select
     id={props.id}
     name={props.name}

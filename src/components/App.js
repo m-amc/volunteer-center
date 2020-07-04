@@ -3,7 +3,7 @@ import Main from "./Main";
 import { useAuth0 } from "../react-auth0-wrapper";
 import { Loading } from "./Loading";
 
-function App() {
+export const App = () => {
   const { loading } = useAuth0();
 
   if (loading) {
@@ -12,5 +12,3 @@ function App() {
 
   return <Main />;
 }
-
-export default App;

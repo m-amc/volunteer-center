@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import firebase from "../utils/firebase";
-import stateData from "./state";
+import { stateData } from "./state";
 import moment from "moment";
 import { Header } from "./Header";
 import { Opportunities } from "./Opportunities";

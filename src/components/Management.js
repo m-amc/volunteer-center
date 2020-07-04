@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import "../partials/_main.scss";
 
-export const Management = (props) => {
+export const Management = props => {
   const dbRef = props.app.dbRef.child("posting"),
     appState = props.app.state,
     app = props.app;

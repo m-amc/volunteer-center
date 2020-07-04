@@ -1,4 +1,4 @@
-const stateData = {
+export const stateData = {
   postings: [],
   id: "",
   organization: "",
@@ -18,5 +18,3 @@ const stateData = {
   headerButtonText: "Post Opportunities",
   filteredCategory: "",
 };
-
-export default stateData;

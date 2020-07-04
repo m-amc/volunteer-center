@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 
-export const Opportunities = (props) => {
+export const Opportunities = props => {
   const postingData = props.postingData;
 
   return (
