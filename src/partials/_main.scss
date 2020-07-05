@@ -122,8 +122,11 @@ form {
 	label {
 		display: block;
 		padding-top: 1.5rem;
-		padding-bottom: 0.5rem;
-	}
+  }
+  
+  input {
+    margin-top: 0.5rem;
+  }
 
 	.fieldsetContainer {
 		@include desktop {
