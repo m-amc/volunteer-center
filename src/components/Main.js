@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import firebase from "../utils/firebase";
 import { stateData } from "./state";
 import moment from "moment";
@@ -19,145 +19,136 @@ import "../utils/fontawesome";
 NOTE: The firebase volunteer-center database will (in the future) have a couple more objects in it.  For example, users and company.  For this project, I will only have 1 object but the structure is prepared to have multiple objects hence why the use of "child". I am planning to build more on top of the existing functionality after the bootcamp.
 */
 
-class App extends Component {
-  constructor() {
-    super();
+const usePostingsViewFilter = ({ setAllPostings, setPostings}) => {
+  /** 
+   * Filter postings 
+   * @param {Object} postings - the postings to be filtered
+   * @param {string} selectedCategory - the selected postings category 
+   */
+  const filterPostings = (postings, selectedCategory) => {
+    const today = new Date();
+    const momentToday = moment(today.toLocaleDateString());
 
-    // Set state to the state.js stateData variable.
-    this.state = stateData;
-
-    this.today = new Date();
-
-    this.dbRef = firebase.database().ref();
-  }
-
-  componentDidMount() {
-    const dbRef = this.dbRef;
-
-    dbRef.on("value", (response) => {
-      // response returns the whole database object so just grab the child (posting)
-      this.postingData = response.val().posting;
-
-      // Filter the postings where end dates are greater or equal to today's date
-      const filteredPostings = this.filterPostings(this.postingData);
-
-      // Because we can't directly change the state, we have to create a new array.
-      const newPostingData = [];
-
-      // Loop through the postingData variable that holds the posting data object and push the data to the new array.  This will render the data to the page via render().  Any new data added will also re-render due to dbRef.on('value') always listening to changes.
-      // eslint-disable-next-line
-      for (let index in filteredPostings) {
-        newPostingData.push(this.postingData[index]);
-      }
-
-      // Here we re-assign the postings state to the newPostingData and we need to clear the role state.
-      this.setState({
-        postings: newPostingData,
-      });
-    });
-  }
-
-  handleCategoryChange = (event) => {
-    const filterPostingData = this.filterPostings(
-      this.postingData,
-      event.target.value
-    );
-    const newPostingData = [];
-
-    // eslint-disable-next-line
-    for (let index in filterPostingData) {
-      newPostingData.push(filterPostingData[index]);
-    }
-
-    const isEmpty = newPostingData.length > 0 ? false : true;
-
-    this.setState({
-      filteredCategory: event.target.value,
-      isNoResult: isEmpty,
-      postings: newPostingData,
-    });
-  };
-
-  // Function to filter the postings. There's no filter() for objects so we need to filter it through for in loop
-  filterPostings = (postingObject, selectedCategory) => {
-    // Create an empty filteredPostings object.  We will push filtered postings here
-    const filteredPostings = {};
-
-    // eslint-disable-next-line
-    for (let key in postingObject) {
-      // use momentjs to correctly parse the date string
-      const momentEndDate = moment(postingObject[key].end_date);
-      const momentToday = moment(this.today.toLocaleDateString());
-
-      const category = postingObject[key].category;
-
+    // return Object.values(postings).filter(data => data.end_data >= momentToday)
+    return Object.values(postings).filter(data => {
       // undefined is the value of the category filter on initial load. It's empty string when All Category is selected.
       if (selectedCategory === undefined || selectedCategory === "") {
-        // Push to the filteredPostings object those postings that are ending today and in the future
-        if (momentEndDate >= momentToday) {
-          filteredPostings[key] = postingObject[key];
-        }
+        return moment(data.end_date) >= momentToday
       } else {
-        if (momentEndDate >= momentToday && category === selectedCategory) {
-          filteredPostings[key] = postingObject[key];
-        }
+        return moment(data.end_date) >= momentToday && data.category === selectedCategory
       }
-    }
-
-    return filteredPostings;
+    })
   };
 
-  render() {
-    return (
-      <div className="app">
-        <Metas />
+  const getFilteredPostingData = postings => {
+    const filteredPostings = filterPostings(postings);
 
-        <a href="#main" className="skip-link">
-          Skip to main content.
-				</a>
+    return Object.values(filteredPostings)
+      .reduce((arr, val) =>
+        [...arr, val]
+        , [])
+  }
 
-        <Router basename="/volunteer-center" history={history}>
-          <NavBar app={this} />
-          <Header />
-
-          <main id="main" className="wrapper">
-            <section>
-              <Switch>
-                <Route
-                  exact
-                  path="/"
-                  render={() => (
-                    <React.Fragment>
-                      <FilterCategory app={this} />
-                      <Opportunities postingData={this.state.postings} />
-                    </React.Fragment>
-                  )}
-                />
-
-                <PrivateRoute
-                  exact
-                  path="/organization"
-                  render={(routeProps) => (
-                    <Management {...routeProps} app={this} />
-                  )}
-                />
-              </Switch>
-            </section>
-
-            <div
-              className={
-                this.state.isNoResult ? "showNoResult" : "hideNoResult"
-              }
-            >
-              <p>No opportunities for this category at this time</p>
-            </div>
-          </main>
-        </Router>
-
-        <Footer />
-      </div>
-    );
+  return {
+    getFilteredPostingData,
+    filterPostings,
   }
 }
 
-export default App;
+export const Main = () => {
+  const state = stateData;
+  const dbRef = firebase.database().ref();
+
+  const [postings, setPostings] = useState([]);
+  const [allPostings, setAllPostings] = useState({});
+  const [hasNoResult, setHasNoResult] = useState(false);
+
+  const { getFilteredPostingData, filterPostings } = usePostingsViewFilter(postings);
+
+  const handleCategoryChange = event => {
+    const data = filterPostings(
+      allPostings,
+      event.target.value
+    );
+
+    const filteredPostingData = getFilteredPostingData(data)
+    const isEmpty = data.length > 0 ? false : true;
+
+    setPostings(filteredPostingData);
+    setHasNoResult(isEmpty);
+  };
+  
+  useEffect(() => {
+    dbRef.on("value", response => { 
+      const responseData = response.val().posting;
+
+      // Only show current postings (end dates greater or equal to today's date)
+      const filteredPostingData = getFilteredPostingData(responseData)
+      
+      setAllPostings(responseData);
+      setPostings(filteredPostingData)
+    })
+  },
+    // eslint-disable-next-line
+    []
+  )
+
+
+  const props = {
+    postingDBRef: dbRef.child("posting"),
+    allPostings,
+    postings,
+    state,
+    handleCategoryChange,
+  }
+
+  return (
+    <div className="app">
+      <Metas />
+
+      <a href="#main" className="skip-link">
+        Skip to main content.
+      </a>
+
+      <Router basename="/volunteer-center" history={history}>
+        <NavBar {...props} />
+        <Header />
+
+        <main id="main" className="wrapper">
+          <section>
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() => (
+                  <>
+                    <FilterCategory {...props} />
+                    <Opportunities {...props} />
+                  </>
+                )}
+              />
+
+              <PrivateRoute
+                exact
+                path="/organization"
+                render={(routeProps) => (
+                  <Management {...routeProps} {...props} />
+                )}
+              />
+            </Switch>
+          </section>
+
+          <div
+            className={
+              hasNoResult ? "showNoResult" : "hideNoResult"
+            }
+          >
+            <p>No opportunities for this category at this time</p>
+          </div>
+        </main>
+      </Router>
+
+      <Footer />
+    </div>
+  );
+}

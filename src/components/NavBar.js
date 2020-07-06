@@ -13,7 +13,6 @@ export const NavBar = () => {
 
   // Whenever the DOM is updated and the url path is in the organization component, it will change the isManagement state
   useEffect(() => {
-    console.log(window.location.pathname);
     if (window.location.pathname === "/volunteer-center/organization") {
       setManagementLinkState(true);
     } else {

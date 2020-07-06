@@ -7,11 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import "../partials/_main.scss";
 
-export const Management = props => {
-  const dbRef = props.app.dbRef.child("posting");
-  const appState = props.app.state;
-  const app = props.app;
-
+export const Management = ({ postingDBRef, state, ...props}) => {
   const [organization, setOrganization] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('Toronto');
@@ -32,12 +28,12 @@ export const Management = props => {
     event.preventDefault();
 
     // Validate date range. Do not continue if there's an error.
-    if (appState.end_date < appState.start_date) {
+    if (state.end_date < state.start_date) {
       return dateRangeError();
     }
 
     // The dbRef push property will be able to return the object key but it needs to be assigned to variable first before setting the state
-    const newPostRef = dbRef.push();
+    const newPostRef = postingDBRef.push();
     newPostRef.set({
       id: newPostRef.key,
       organization,
@@ -181,11 +177,11 @@ export const Management = props => {
               <Category
                 name="category"
                 id="category"
-                app={app}
                 onChange={e => setCategory(e.target.value)}
                 value={category}
                 required="required"
                 defaultText="Select Category"
+                {...props}
               />
             </label>
 
@@ -235,7 +231,7 @@ export const Management = props => {
                   <DatePicker
                     selected={endDate}
                     onChange={e => setEndDate(e)}
-                    minDate={appState.start_date}
+                    minDate={state.start_date}
                   />
                 </label>
               </div>

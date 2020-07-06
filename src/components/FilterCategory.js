@@ -1,12 +1,12 @@
 import React from "react";
 import { Category } from "./Category";
 
-export const FilterCategory = ({ app }) => (
+export const FilterCategory = ({ handleCategoryChange, filteredCategory }) => (
   <div className="filterCategory">
     <p>Filter:</p>
     <Category
-      onChange={app.handleCategoryChange}
-      value={app.state.filteredCategory}
+      onChange={handleCategoryChange}
+      value={filteredCategory}
       defaultText="All Category"
     />
   </div>
