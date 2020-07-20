@@ -7,6 +7,13 @@ import { Auth0Provider } from "./react-auth0-wrapper";
 import config from "./auth_config.json";
 import history from "./utils/history";
 
+import { createStore } from 'redux';
+import rootReducer from './store/reducers/rootReducer'; 
+
+import { Provider } from 'react-redux'; //binding layer which binds redux with our react app
+
+const store = createStore(rootReducer);
+
 // A function that routes the user to the right place
 // after login
 const onRedirectCallback = (appState) => {
@@ -30,8 +37,10 @@ ReactDOM.render(
 		client_id={config.clientId}
 		redirect_uri={window.location.origin + "/volunteer-center"}
 		onRedirectCallback={onRedirectCallback}
-	>
-		<App />
+  >
+    <Provider store={store}>
+      <App />
+    </Provider>
 	</Auth0Provider>,
 	document.getElementById("root")
 );
