@@ -2,10 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 
-export const Opportunities = ({ postings }) => {
+export const Opportunities = ({ postedOpportunities }) => {
+  console.log("POSTED OPPOTUNITIES", postedOpportunities)
   return (
     <ul>
-      {postings.map((post, index) => {
+      {postedOpportunities.map((post, index) => {
         return (
           <li key={index}>
             <div>

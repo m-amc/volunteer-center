@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import firebase from "../utils/firebase";
-import { stateData } from "./state";
-import moment from "moment";
+import React, { useState } from "react";
+// import firebase from "../utils/firebase";
+// import { stateData } from "./state";
+// import moment from "moment";
 import { Header } from "./Header";
 import { Opportunities } from "./Opportunities";
 import { Management } from "./Management";
@@ -15,53 +15,60 @@ import history from "../utils/history";
 import ".././partials/App.scss";
 import "../utils/fontawesome";
 
+// connect Main component with the redux store so we can read values from the Reudx store and re-read the values when the store updates
+import { connect } from 'react-redux'; 
+
 /*
 NOTE: The firebase volunteer-center database will (in the future) have a couple more objects in it.  For example, users and company.  For this project, I will only have 1 object but the structure is prepared to have multiple objects hence why the use of "child". I am planning to build more on top of the existing functionality after the bootcamp.
 */
 
-const usePostingsViewFilter = ({ setAllPostings, setPostings}) => {
-  /** 
-   * Filter postings 
-   * @param {Object} postings - the postings to be filtered
-   * @param {string} selectedCategory - the selected postings category 
-   */
-  const filterPostings = (postings, selectedCategory) => {
-    const today = new Date();
-    const momentToday = moment(today.toLocaleDateString());
+// const usePostingsViewFilter = ({ setAllPostings, setPostings}) => {
+//   /** 
+//    * Filter postings 
+//    * @param {Object} postings - the postings to be filtered
+//    * @param {string} selectedCategory - the selected postings category 
+//    */
+//   const filterPostings = (postings, selectedCategory) => {
+//     const today = new Date();
+//     const momentToday = moment(today.toLocaleDateString());
 
-    // return Object.values(postings).filter(data => data.end_data >= momentToday)
-    return Object.values(postings).filter(data => {
-      // undefined is the value of the category filter on initial load. It's empty string when All Category is selected.
-      if (selectedCategory === undefined || selectedCategory === "") {
-        return moment(data.end_date) >= momentToday
-      } else {
-        return moment(data.end_date) >= momentToday && data.category === selectedCategory
-      }
-    })
-  };
+//     // return Object.values(postings).filter(data => data.end_data >= momentToday)
+//     return Object.values(postings).filter(data => {
+//       // undefined is the value of the category filter on initial load. It's empty string when All Category is selected.
+//       if (selectedCategory === undefined || selectedCategory === "") {
+//         return moment(data.end_date) >= momentToday
+//       } else {
+//         return moment(data.end_date) >= momentToday && data.category === selectedCategory
+//       }
+//     })
+//   };
 
-  const getFilteredPostingData = postings => {
-    const filteredPostings = filterPostings(postings);
+//   const getFilteredPostingData = postings => {
+//     const filteredPostings = filterPostings(postings);
 
-    return Object.values(filteredPostings)
-      .reduce((arr, val) =>
-        [...arr, val]
-        , [])
-  }
+//     return Object.values(filteredPostings)
+//       .reduce((arr, val) =>
+//         [...arr, val]
+//         , [])
+//   }
 
-  return {
-    getFilteredPostingData,
-    filterPostings,
-  }
-}
+//   return {
+//     getFilteredPostingData,
+//     filterPostings,
+//   }
+// }
 
-export const Main = () => {
+const Main = ({ ...props }) => {
+
+  const [hasNoResult, setHasNoResult] = useState(false);
+
+  /*
   const state = stateData;
   const dbRef = firebase.database().ref();
 
   const [postings, setPostings] = useState([]);
   const [allPostings, setAllPostings] = useState({});
-  const [hasNoResult, setHasNoResult] = useState(false);
+  
 
   const { getFilteredPostingData, filterPostings } = usePostingsViewFilter(postings);
 
@@ -101,6 +108,7 @@ export const Main = () => {
     state,
     handleCategoryChange,
   }
+  */
 
   return (
     <div className="app">
@@ -147,8 +155,16 @@ export const Main = () => {
           </div>
         </main>
       </Router>
-
       <Footer />
     </div>
   );
 }
+
+// This function takes in the state of the store (that we already have access to) and will return an object which represents which properties are attached to the props of this component so we can access the props in this component
+const mapStateToProps = (state) => {
+  return {
+    postedOpportunities: state.posting.posting
+  }
+}
+
+export default connect(mapStateToProps)(Main)
