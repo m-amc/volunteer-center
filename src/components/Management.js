@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import "../partials/_main.scss";
 
-export const Management = ({ postingDBRef, state, ...props}) => {
+export const Management = ({ addPosting, ...props}) => {
   const [organization, setOrganization] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('Toronto');
@@ -28,27 +28,28 @@ export const Management = ({ postingDBRef, state, ...props}) => {
     event.preventDefault();
 
     // Validate date range. Do not continue if there's an error.
-    if (state.end_date < state.start_date) {
+    if (endDate < startDate) {
       return dateRangeError();
     }
 
-    // The dbRef push property will be able to return the object key but it needs to be assigned to variable first before setting the state
-    const newPostRef = postingDBRef.push();
-    newPostRef.set({
-      id: newPostRef.key,
-      organization,
-      address,
-      state: stateProvince,
-      city,
-      phone: phone.replace(/-/g, ""),
-      website,
-      email,
-      category,
-      role,
-      role_description: roleDescription,
-      start_date: startDate.toLocaleDateString(),
-      end_date: endDate.toLocaleDateString(),
-      created: Date.now()
+    addPosting({
+      posting: [
+        {
+          organization,
+          address,
+          state: 'ON',
+          city,
+          phone: phone.replace(/-/g, ""),
+          website,
+          email,
+          category,
+          role,
+          role_description: roleDescription,
+          start_date: startDate.toLocaleDateString(),
+          end_date: endDate.toLocaleDateString(),
+          created: Date.now()
+        }
+      ]
     });
 
     // Clear the fields after submit
@@ -67,7 +68,7 @@ export const Management = ({ postingDBRef, state, ...props}) => {
 
     organizationInput.current.focus();
     saveSuccessful();
-  };
+  }
 
   return (
     <form action="" onSubmit={handleSubmit}>
@@ -231,7 +232,7 @@ export const Management = ({ postingDBRef, state, ...props}) => {
                   <DatePicker
                     selected={endDate}
                     onChange={e => setEndDate(e)}
-                    minDate={state.start_date}
+                    // minDate={state.start_date}
                   />
                 </label>
               </div>
