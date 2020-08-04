@@ -1,4 +1,5 @@
 import {
+  REQUEST_POSTINGS,
   REQUEST_POSTINGS_SUCCESS,
   REQUEST_POSTINGS_ERROR,
   FILTER_POSTINGS,
@@ -9,12 +10,21 @@ import { getActivePostings } from '../selectors/postingSelectors'
 const initState = {posting: []}
 
 const postingReducer = (state = initState, action) => {
+  const { payload, filter } = action;
+
   // This is where we will manipulate the data. 
   // Return the state if there's no matching action
   switch (action.type) {
+    case REQUEST_POSTINGS:
+      return {
+        posting: [],
+        error: false,
+        loading: true
+      }
     case REQUEST_POSTINGS_SUCCESS:
-      const responseData = action.payload
+      const responseData = payload;
       
+      // ToDo - FILTER BY DATE AS WELL!
       const filteredData = responseData
         .filter(data => data.category === action.filter)
 
@@ -26,27 +36,29 @@ const postingReducer = (state = initState, action) => {
       return {
         posting: filteredData,
         allPostings: responseData,
+        filter,
         error: false,
-        filter: action.filter
+        loading: false
       }      
 
     case REQUEST_POSTINGS_ERROR:
       return {
         posting: [],
-        error: true
+        error: true,
+        loading: false,
       }
     
     case FILTER_POSTINGS:
       // Make sure to destructure state to ensure we still have the allPosting state prop
       return {
         ...state, 
-        posting: getActivePostings(state.allPostings, action.payload.category)
+        posting: getActivePostings(state.allPostings, payload.category)
       }
     
     case ADD_POSTING_SUCCESS:
       return {
         ...state,
-        posting: action.payload
+        posting: payload
       }
       
     default:

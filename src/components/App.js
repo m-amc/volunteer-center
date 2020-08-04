@@ -1,7 +1,8 @@
 import React from "react";
-import Main from "./Main";
+// import Main from "./main.component";
+import { MainContainer } from './main.container';
 import { useAuth0 } from "../react-auth0-wrapper";
-import { Loading } from "./Loading";
+import { Loading } from "./loading.component";
 
 export const App = () => {
   const { loading } = useAuth0();
@@ -10,5 +11,5 @@ export const App = () => {
     return <Loading />;
   }
 
-  return <Main />;
+  return <MainContainer />;
 }

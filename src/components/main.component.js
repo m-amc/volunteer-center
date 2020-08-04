@@ -1,29 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Header } from "./Header";
-import { Opportunities } from "./Opportunities";
-import { Management } from "./Management";
-import { Footer } from "./Footer";
-import { FilterCategory } from "./FilterCategory";
-import { NavBar } from "./NavBar";
-import { Metas } from "./Metas";
+import { Header } from "./header.component";
+import { Opportunities } from "./opportunities.component";
+import { Management } from "./management.component";
+import { Footer } from "./footer.component";
+import { FilterCategory } from "./filter-category.component";
+import { NavBar } from "./nav-bar.component";
+import { Metas } from "./metas.component";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import PrivateRoute from "./PrivateRoute";
+import PrivateRoute from "./private-route.component";
 import history from "../utils/history";
 import ".././partials/App.scss";
 import "../utils/fontawesome";
-import { selectActivePostings } from '../store/selectors/postingSelectors';
 
-// connect Main component with the redux store so we can read values from the Redux store and re-read the values when the store updates
-import { connect } from 'react-redux'; 
-import { createStructuredSelector } from 'reselect';
-
-import {
-  requestPostings,
-  filterPostings,
-  addPosting,
-} from '../store/actions/postingActions'
-
-const Main = ({
+export const Main = ({
   requestPostings,
   filterPostings,
   activePostings,
@@ -31,10 +20,11 @@ const Main = ({
 }) => {
   const [hasNoResult, setHasNoResult] = useState(false);
   const [category, setCategory] = useState(undefined);
-  
+
   useEffect(() => {
-    requestPostings({ filter: category })
-  }, [requestPostings, category])
+    requestPostings({ filter: undefined })
+  }, [requestPostings])
+
 
   useEffect(() => {
     setHasNoResult(activePostings.length === 0)
@@ -106,25 +96,3 @@ const Main = ({
     </div>
   );
 }
-
-// This function takes in the state of the store (that we already have access to) and will return an object which represents which properties are attached to the props of this component so we can access the props in this component
-
-const mapStateToProps = createStructuredSelector({
-  activePostings: selectActivePostings,
-})
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    // ES6 Concise method notation that is available when the function is inside an object
-    // requestPostings() {
-    //   dispatch(requestPostings())
-    // },
-
-    // Fat arrow
-    filterPostings: payload => dispatch(filterPostings(payload)),
-    addPosting: payload => dispatch(addPosting(payload)),
-    requestPostings: (payload) => dispatch(requestPostings(payload))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Main)

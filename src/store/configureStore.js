@@ -4,16 +4,15 @@ import createSagaMiddleware from 'redux-saga'; // createSagaMiddleware - connect
 import rootSaga from '../store/sagas';
 import logger from 'redux-logger';
 
-
-// create the saga middleware and mount it on the Store
-const sagaMiddleware = createSagaMiddleware();
-const middleware = [sagaMiddleware, logger]
-
 const configureStore = () => {
+  // create the saga middleware and mount it on the Store
+  const sagaMiddleware = createSagaMiddleware();
+  const middleware = [sagaMiddleware, logger]
+
   const store = createStore(
     rootReducer,
     compose(
-      applyMiddleware(...middleware)
+      applyMiddleware(...middleware) // applyMiddleware is an enhancer
     )
   );
 

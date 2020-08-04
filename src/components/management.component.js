@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
 import DatePicker from "react-datepicker";
-import { Category } from "./Category";
+import { Category } from "./category.component";
 import { saveSuccessful, dateRangeError } from "../utils/alerts";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";

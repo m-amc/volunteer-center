@@ -1,5 +1,5 @@
 import React from "react";
-import { Category } from "./Category";
+import { Category } from "./category.component";
 
 export const FilterCategory = ({ category, handleCategoryChange }) => (
   <div className="filterCategory">
