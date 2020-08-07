@@ -1,5 +1,5 @@
 import {
-  REQUEST_POSTINGS,
+  REQUEST_POSTINGS_START,
   REQUEST_POSTINGS_SUCCESS,
   REQUEST_POSTINGS_ERROR,
   FILTER_POSTINGS,
@@ -7,58 +7,68 @@ import {
 } from '../actions/actionTypes';
 import { getActivePostings } from '../selectors/postingSelectors'
 
-const initState = {posting: []}
+const initState = {
+  allPostings: [],
+  postings: [],
+  isLoading: false,
+  isError: false,
+  currentFilter: ""
+}
 
 const postingReducer = (state = initState, action) => {
+  
   const { payload, filter } = action;
 
   // This is where we will manipulate the data. 
   // Return the state if there's no matching action
   switch (action.type) {
-    case REQUEST_POSTINGS:
+    case REQUEST_POSTINGS_START:
       return {
-        posting: [],
-        error: false,
-        loading: true
+        ...state,
+        isLoading: true
       }
     case REQUEST_POSTINGS_SUCCESS:
       const responseData = payload;
       
-      // ToDo - FILTER BY DATE AS WELL!
-      const filteredData = responseData
-        .filter(data => data.category === action.filter)
-
       /**
-       * posting - this is what gets filtered and rendered
+       * postings - this is what gets filtered and rendered
        * allPostings - this will hold the raw data and will be the arg when filtering. 
-       * We can't use posting prop because once it gets filtered, the next filter will be based on the already filtered data which may not contain the category we need
+       * We can't use postings prop because once it gets filtered, the next filter will be based on the already filtered data which may not contain the category we need
        */
       return {
-        posting: filteredData,
+        ...state,
+        postings: responseData,
         allPostings: responseData,
-        filter,
-        error: false,
-        loading: false
+        isLoading: false
       }      
 
     case REQUEST_POSTINGS_ERROR:
       return {
+        ...state,
         posting: [],
-        error: true,
-        loading: false,
+        allPostings: [],
+        isError: true,
+        isLoading: false,
       }
     
     case FILTER_POSTINGS:
-      // Make sure to destructure state to ensure we still have the allPosting state prop
       return {
         ...state, 
-        posting: getActivePostings(state.allPostings, payload.category)
+        postings: getActivePostings(state.allPostings, filter),
+        currentFilter: filter
       }
     
-    case ADD_POSTING_SUCCESS:
+    case ADD_POSTING_SUCCESS:      
       return {
         ...state,
-        posting: payload
+        postings: [
+          ...state.postings,
+          payload
+        ],
+        allPostings: [
+          ...state.allPostings,
+          payload
+        ]
       }
       
     default:

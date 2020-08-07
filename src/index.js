@@ -19,7 +19,7 @@ import {
 } from 'react-redux-firebase'
 
 const rrfConfig = {
-  posting: 'posting',
+  postings: 'postings',
   enabledLogging: 'false'
 }
 

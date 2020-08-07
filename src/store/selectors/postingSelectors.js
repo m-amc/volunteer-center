@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 import moment from "moment";
 
 const getAllPostings = (state) => {
-  return state.posting.posting
+  return state.postings.postings
 }
 
 export const selectAllPostings = createSelector(
@@ -21,9 +21,12 @@ export const getActivePostings = (postings, category) => {
       category ? moment(data.end_date) >= momentToday && data.category === category : moment(data.end_date) >= momentToday)
 }
 
+export const selectCurrentFilter = (state) => state.postings.currentFilter
+
 export const selectActivePostings = createSelector(
   selectAllPostings,
-  postings => {
-    return getActivePostings(postings, null)
+  selectCurrentFilter,
+  (postings, currentFilter) => {
+    return getActivePostings(postings, currentFilter)
   }
 )

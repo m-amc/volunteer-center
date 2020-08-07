@@ -1,15 +1,22 @@
 import {
-  REQUEST_POSTINGS,
+  REQUEST_POSTINGS_START,
   REQUEST_POSTINGS_SUCCESS,
   REQUEST_POSTINGS_ERROR,
   FILTER_POSTINGS,
-  ADD_POSTING,
-  ADD_POSTING_SUCCESS
+  ADD_POSTING_START,
+  ADD_POSTING_SUCCESS,
+  FETCH_POSTINGS,
 } from './actionTypes';
 
-export const requestPostings = payload => {
+export const fetchPostings = () => {
   return {
-    type: REQUEST_POSTINGS,
+    type: FETCH_POSTINGS
+  }
+}
+
+export const requestPostingsStart = payload => {
+  return {
+    type: REQUEST_POSTINGS_START,
     payload
   }
 }
@@ -28,21 +35,21 @@ export const requestPostingsError = () => {
   }
 }
 
-export const filterPostings = payload => {
+export const filterPostings = filter => {
   return {
     type: FILTER_POSTINGS,
-    payload
+    filter
   }
 }
 
-export const addPosting = payload => {
+export const addPostingStart = (payload) => {
   return {
-    type: ADD_POSTING,
+    type: ADD_POSTING_START,
     payload
   }
 }
 
-export const addPostingSuccess = payload => {
+export const addPostingSuccess = (payload) => {
   return {
     type: ADD_POSTING_SUCCESS,
     payload

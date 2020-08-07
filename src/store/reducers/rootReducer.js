@@ -6,7 +6,7 @@ import {
 
 const rootReducer = combineReducers({
   firebase: firebaseReducer,
-  posting: postingReducer
+  postings: postingReducer
 })
 
 export default rootReducer

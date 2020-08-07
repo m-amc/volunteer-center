@@ -1,14 +1,13 @@
 import { all, takeLatest, put , call, takeEvery} from 'redux-saga/effects';
 import {
-  REQUEST_POSTINGS,
-  ADD_POSTING
+  ADD_POSTING_START,
+  FETCH_POSTINGS
 } from '../actions/actionTypes';
 import {
   requestPostingsSuccess,
   requestPostingsError,
   addPostingSuccess,
-  requestPostings,
-  filterPostings
+  requestPostingsStart,
 } from '../actions/postingActions';
 import firebase from 'firebase/app';
 
@@ -16,7 +15,7 @@ const getFirebaseData = () => {
   return new Promise(function (resolve, reject) {
     let postingData = []
 
-    firebase.ref('posting').once("value").then(snap => {
+    firebase.ref('postings').once("value").then(snap => {
       const dataRef = snap.val();
       Object.keys(dataRef).map(
         d => postingData.push(dataRef[d])
@@ -26,28 +25,26 @@ const getFirebaseData = () => {
   })
 }
 
-function* fetchPostings({ payload }) {
-  try {    
+function* fetchPostingsAsync({category}) {
+  try {
+    yield put(requestPostingsStart());
     const data = yield call(getFirebaseData)
-    yield put(requestPostingsSuccess(data, payload.filter))
-    yield put(filterPostings({ category: payload.filter }))
+    yield put(requestPostingsSuccess(data));
   } catch (error) {
     yield put(requestPostingsError)
   }
 }
 
 function* addNewPosting({ payload }) {
-  const newPostRef = yield firebase.ref('posting').push();
+  const newPostRef = yield firebase.ref('postings').push();
   const data = { ...payload.posting[0], id: newPostRef.key };
   yield newPostRef.set(data)
   yield put(addPostingSuccess(data))
-  yield put(requestPostings({ filter: payload.posting[0].category }))
-
 }
 
 export default function* rootSaga() {
   yield all([
-    takeLatest(REQUEST_POSTINGS, fetchPostings),
-    takeEvery(ADD_POSTING, addNewPosting)
+    takeLatest(FETCH_POSTINGS, fetchPostingsAsync),
+    takeEvery(ADD_POSTING_START, addNewPosting)
   ])
 }

@@ -13,18 +13,19 @@ import ".././partials/App.scss";
 import "../utils/fontawesome";
 
 export const Main = ({
-  requestPostings,
+  fetchPostings,
   filterPostings,
   activePostings,
   ...props
 }) => {
+
   const [hasNoResult, setHasNoResult] = useState(false);
-  const [category, setCategory] = useState(undefined);
+  const [category, setCategory] = useState("");
 
   useEffect(() => {
-    requestPostings({ filter: undefined })
-  }, [requestPostings])
-
+    // dispatch filterPostings action
+    fetchPostings()
+  }, [fetchPostings])
 
   useEffect(() => {
     setHasNoResult(activePostings.length === 0)
@@ -32,11 +33,8 @@ export const Main = ({
 
   const handleCategoryChange = event => {
     setCategory(event.target.value)
-    filterPostings(
-      {
-        category: event.target.value
-      }
-    )
+
+    filterPostings(event.target.value)
   }
 
   const filterCategoryProps = {

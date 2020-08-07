@@ -6,9 +6,9 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import {
-  requestPostings,
   filterPostings,
-  addPosting,
+  fetchPostings,
+  addPostingStart,
 } from '../store/actions/postingActions'
 
 // This function takes in the state of the store (that we already have access to) and will return an object which represents which properties are attached to the props of this component so we can access the props in this component
@@ -26,8 +26,8 @@ const mapDispatchToProps = (dispatch) => {
 
     // Fat arrow
     filterPostings: payload => dispatch(filterPostings(payload)),
-    addPosting: payload => dispatch(addPosting(payload)),
-    requestPostings: (payload) => dispatch(requestPostings(payload))
+    addPosting: payload => dispatch(addPostingStart(payload)),
+    fetchPostings: () => dispatch(fetchPostings())
   }
 }
 

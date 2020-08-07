@@ -49,7 +49,7 @@ export const Management = ({ addPosting, ...props}) => {
           end_date: endDate.toLocaleDateString(),
           created: Date.now()
         }
-      ]
+      ],
     });
 
     // Clear the fields after submit
@@ -136,8 +136,8 @@ export const Management = ({ addPosting, ...props}) => {
                 pattern="[\d]{3}-?[\d]{3}-?[\d]{4}"
                 onChange={e => setPhone(e.target.value)}
                 value={phone}
-                placeholder="416-123-456"
-                title="Format: 416-123-456 or 416123456"
+                placeholder="416-123-4567"
+                title="Format: 416-123-4567 or 4161234567"
                 required
               />
             </label>
@@ -152,7 +152,6 @@ export const Management = ({ addPosting, ...props}) => {
                 value={website}
                 placeholder="https://organization.com"
               />
-
             </label>
             
             <label>
@@ -161,7 +160,7 @@ export const Management = ({ addPosting, ...props}) => {
                 id="email"
                 type="email"
                 name="email"
-                onChange={e => setEmail(e.target.email)}
+                onChange={e => setEmail(e.target.value)}
                 value={email}
                 size="30"
                 placeholder="johndoe@domain.com"
