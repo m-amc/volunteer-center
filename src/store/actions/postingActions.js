@@ -14,10 +14,9 @@ export const fetchPostings = () => {
   }
 }
 
-export const requestPostingsStart = payload => {
+export const requestPostingsStart = () => {
   return {
     type: REQUEST_POSTINGS_START,
-    payload
   }
 }
 
@@ -29,9 +28,10 @@ export const requestPostingsSuccess = (payload, filter) => {
   }
 }
 
-export const requestPostingsError = () => {
+export const requestPostingsError = payload => {
   return {
-    type: REQUEST_POSTINGS_ERROR
+    type: REQUEST_POSTINGS_ERROR,
+    payload
   }
 }
 

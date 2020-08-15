@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from '../store/reducers/rootReducer';
-import createSagaMiddleware from 'redux-saga'; // createSagaMiddleware - connects the Sagas to the Redux Store
+// createSagaMiddleware - connects the Sagas to the Redux Store
+import createSagaMiddleware from 'redux-saga'; 
 import rootSaga from '../store/sagas';
 import logger from 'redux-logger';
 
@@ -12,7 +13,8 @@ const configureStore = () => {
   const store = createStore(
     rootReducer,
     compose(
-      applyMiddleware(...middleware) // applyMiddleware is an enhancer
+      // applyMiddleware is an enhancer
+      applyMiddleware(...middleware)
     )
   );
 

@@ -23,7 +23,6 @@ export const Main = ({
   const [category, setCategory] = useState("");
 
   useEffect(() => {
-    // dispatch filterPostings action
     fetchPostings()
   }, [fetchPostings])
 

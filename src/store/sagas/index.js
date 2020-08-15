@@ -9,36 +9,21 @@ import {
   addPostingSuccess,
   requestPostingsStart,
 } from '../actions/postingActions';
-import firebase from 'firebase/app';
+import { getFirebaseData, firebasePush, firebaseSetData } from '../../services/firebase-data.service';
 
-const getFirebaseData = () => {
-  return new Promise(function (resolve, reject) {
-    let postingData = []
-
-    firebase.ref('postings').once("value").then(snap => {
-      const dataRef = snap.val();
-      Object.keys(dataRef).map(
-        d => postingData.push(dataRef[d])
-      )
-      resolve(postingData)
-    })
-  })
-}
-
-function* fetchPostingsAsync({category}) {
+export function* fetchPostingsAsync({category}) {
   try {
     yield put(requestPostingsStart());
     const data = yield call(getFirebaseData)
     yield put(requestPostingsSuccess(data));
   } catch (error) {
-    yield put(requestPostingsError)
+    yield put(requestPostingsError(error))
   }
 }
 
-function* addNewPosting({ payload }) {
-  const newPostRef = yield firebase.ref('postings').push();
-  const data = { ...payload.posting[0], id: newPostRef.key };
-  yield newPostRef.set(data)
+export function* addNewPosting({ payload }) {
+  const newPostRef = yield firebasePush();
+  const data = yield firebaseSetData(payload, newPostRef);
   yield put(addPostingSuccess(data))
 }
 
