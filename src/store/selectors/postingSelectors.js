@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect'
 import moment from "moment";
 
+const momentDateFormat = "MM/DD/YYYY"
+
 const getAllPostings = (state) => {
   return state.postings.postings
 }
@@ -14,11 +16,11 @@ export const selectAllPostings = createSelector(
 
 export const getActivePostings = (postings, category) => {
   const today = new Date();
-  const momentToday = moment(today.toLocaleDateString());
+  const momentToday = moment(today.toLocaleDateString(), momentDateFormat);
 
   return Object.values(postings)
     .filter(data =>
-      category ? moment(data.end_date) >= momentToday && data.category === category : moment(data.end_date) >= momentToday)
+      category ? moment(data.end_date, momentDateFormat) >= momentToday && data.category === category : moment(data.end_date, momentDateFormat) >= momentToday)
 }
 
 export const selectCurrentFilter = (state) => state.postings.currentFilter
