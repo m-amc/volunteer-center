@@ -15,12 +15,9 @@ const initState = {
   currentFilter: ""
 }
 
-const postingReducer = (state = initState, action) => {
-  
+const postingReducer = (state = initState, action) => {  
   const { payload, filter } = action;
 
-  // This is where we will manipulate the data. 
-  // Return the state if there's no matching action
   switch (action.type) {
     case REQUEST_POSTINGS_START:
       return {
@@ -72,6 +69,7 @@ const postingReducer = (state = initState, action) => {
       }
       
     default:
+      // Return the state if there's no matching action
       return state
   }
 }

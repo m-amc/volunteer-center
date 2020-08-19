@@ -89,7 +89,6 @@ export const Management = ({ addPosting, ...props}) => {
                 ref={organizationInput}
                 required
               />
-
             </label>
 
             <label>

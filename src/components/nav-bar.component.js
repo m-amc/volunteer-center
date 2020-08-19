@@ -63,19 +63,5 @@ export const NavBar = () => {
         </nav>
       </div>
     </div>
-
-    // <div className="loginOut wrapper">
-    // {!isAuthenticated && (
-    //     <button
-    //         onClick={() =>
-    //             loginWithRedirect({})
-    //         }
-    //     >
-    //         Sign In
-    //     </button>
-    // )}
-
-    // {isAuthenticated && <button onClick={() => logout()}>Sign out</button>}
-    // </div>
   );
 };
