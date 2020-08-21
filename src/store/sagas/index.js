@@ -1,4 +1,4 @@
-import { all, takeLatest, put , call, takeEvery} from 'redux-saga/effects';
+import { all, takeLatest, put, takeEvery, take} from 'redux-saga/effects';
 import {
   ADD_POSTING_START,
   FETCH_POSTINGS
@@ -11,11 +11,15 @@ import {
 } from '../actions/postingActions';
 import { getFirebaseData, firebasePush, firebaseSetData } from '../../services/firebase-data.service';
 
-export function* fetchPostingsAsync({category}) {
+export function* fetchPostingsAsync({ category }) {
   try {
-    yield put(requestPostingsStart());
-    const data = yield call(getFirebaseData)
-    yield put(requestPostingsSuccess(data));
+    const connectToFirebase = getFirebaseData();
+
+    while (true) {
+      yield put(requestPostingsStart());
+      const data = yield take(connectToFirebase)
+      yield put(requestPostingsSuccess(data));
+    }
   } catch (error) {
     yield put(requestPostingsError(error))
   }
