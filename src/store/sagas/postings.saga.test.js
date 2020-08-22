@@ -7,7 +7,6 @@ import {
   requestPostingsStart,
   requestPostingsSuccess,
   requestPostingsError,
-  addPostingSuccess
 } from '../actions/postingActions';
 import {
   getFirebaseData,
@@ -73,8 +72,6 @@ describe('Postings saga', () => {
       const generator = addNewPosting({ payload});
       
       expect(generator.next().value).toEqual(firebasePush());
-      generator.next()
-      expect(generator.next(payload).value).toEqual(put(addPostingSuccess(payload)))
     })
   })
 })

@@ -6,7 +6,6 @@ import {
 import {
   requestPostingsSuccess,
   requestPostingsError,
-  addPostingSuccess,
   requestPostingsStart,
 } from '../actions/postingActions';
 import { getFirebaseData, firebasePush, firebaseSetData } from '../../services/firebase-data.service';
@@ -27,8 +26,8 @@ export function* fetchPostingsAsync({ category }) {
 
 export function* addNewPosting({ payload }) {
   const newPostRef = yield firebasePush();
-  const data = yield firebaseSetData(payload, newPostRef);
-  yield put(addPostingSuccess(data))
+  yield firebaseSetData(payload, newPostRef);
+  // we no longer need to call the reducer as our saga is no actively listening to firebase changes through the .on("value")
 }
 
 export default function* rootSaga() {

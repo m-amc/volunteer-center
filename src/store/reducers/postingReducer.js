@@ -3,7 +3,6 @@ import {
   REQUEST_POSTINGS_SUCCESS,
   REQUEST_POSTINGS_ERROR,
   FILTER_POSTINGS,
-  ADD_POSTING_SUCCESS
 } from '../actions/actionTypes';
 import { getActivePostings } from '../selectors/postingSelectors'
 
@@ -51,21 +50,8 @@ const postingReducer = (state = initState, action) => {
     case FILTER_POSTINGS:
       return {
         ...state, 
-        postings: getActivePostings(state.allPostings, filter),
+        postings: getActivePostings(state.postings, filter),
         currentFilter: filter
-      }
-    
-    case ADD_POSTING_SUCCESS:      
-      return {
-        ...state,
-        postings: [
-          ...state.postings,
-          payload
-        ],
-        allPostings: [
-          ...state.allPostings,
-          payload
-        ]
       }
       
     default:

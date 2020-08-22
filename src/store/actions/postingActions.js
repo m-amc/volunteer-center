@@ -4,7 +4,6 @@ import {
   REQUEST_POSTINGS_ERROR,
   FILTER_POSTINGS,
   ADD_POSTING_START,
-  ADD_POSTING_SUCCESS,
   FETCH_POSTINGS,
 } from './actionTypes';
 
@@ -45,13 +44,6 @@ export const filterPostings = filter => {
 export const addPostingStart = (payload) => {
   return {
     type: ADD_POSTING_START,
-    payload
-  }
-}
-
-export const addPostingSuccess = (payload) => {
-  return {
-    type: ADD_POSTING_SUCCESS,
     payload
   }
 }
