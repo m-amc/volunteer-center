@@ -9,7 +9,6 @@ import { getActivePostings } from '../selectors/postingSelectors'
 const initState = {
   allPostings: [],
   postings: [],
-  isLoading: false,
   isError: false,
   currentFilter: ""
 }
@@ -21,7 +20,6 @@ const postingReducer = (state = initState, action) => {
     case REQUEST_POSTINGS_START:
       return {
         ...state,
-        isLoading: true
       }
     case REQUEST_POSTINGS_SUCCESS:
       const responseData = payload;
@@ -35,7 +33,6 @@ const postingReducer = (state = initState, action) => {
         ...state,
         postings: responseData,
         allPostings: responseData,
-        isLoading: false
       }      
 
     case REQUEST_POSTINGS_ERROR:
@@ -44,13 +41,12 @@ const postingReducer = (state = initState, action) => {
         posting: [],
         allPostings: [],
         isError: true,
-        isLoading: false,
       }
     
     case FILTER_POSTINGS:
       return {
         ...state, 
-        postings: getActivePostings(state.postings, filter),
+        postings: getActivePostings(state.allPostings, filter),
         currentFilter: filter
       }
       

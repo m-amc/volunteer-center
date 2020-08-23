@@ -8,14 +8,14 @@ import {
   requestPostingsError,
   requestPostingsStart,
 } from '../actions/postingActions';
-import { getFirebaseData, firebasePush, firebaseSetData } from '../../services/firebase-data.service';
+import { createEventChannel, firebasePush, firebaseSetData } from '../../services/firebase-data.service';
 
 export function* fetchPostingsAsync({ category }) {
   try {
-    const connectToFirebase = getFirebaseData();
+    const connectToFirebase = createEventChannel();
+    yield put(requestPostingsStart());
 
     while (true) {
-      yield put(requestPostingsStart());
       const data = yield take(connectToFirebase)
       yield put(requestPostingsSuccess(data));
     }
