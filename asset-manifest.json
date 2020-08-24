@@ -1,27 +1,27 @@
 {
   "files": {
     "main.css": "/volunteer-center/static/css/main.3c32dfd3.chunk.css",
-    "main.js": "/volunteer-center/static/js/main.e9f17a6a.chunk.js",
-    "main.js.map": "/volunteer-center/static/js/main.e9f17a6a.chunk.js.map",
+    "main.js": "/volunteer-center/static/js/main.5b353d81.chunk.js",
+    "main.js.map": "/volunteer-center/static/js/main.5b353d81.chunk.js.map",
     "runtime-main.js": "/volunteer-center/static/js/runtime-main.518a7fb6.js",
     "runtime-main.js.map": "/volunteer-center/static/js/runtime-main.518a7fb6.js.map",
-    "static/css/2.d4197120.chunk.css": "/volunteer-center/static/css/2.d4197120.chunk.css",
-    "static/js/2.b971f6ba.chunk.js": "/volunteer-center/static/js/2.b971f6ba.chunk.js",
-    "static/js/2.b971f6ba.chunk.js.map": "/volunteer-center/static/js/2.b971f6ba.chunk.js.map",
+    "static/css/2.c1dba388.chunk.css": "/volunteer-center/static/css/2.c1dba388.chunk.css",
+    "static/js/2.98c0ffc1.chunk.js": "/volunteer-center/static/js/2.98c0ffc1.chunk.js",
+    "static/js/2.98c0ffc1.chunk.js.map": "/volunteer-center/static/js/2.98c0ffc1.chunk.js.map",
     "index.html": "/volunteer-center/index.html",
-    "precache-manifest.2c0aeab153adf1cec343dc0f38409258.js": "/volunteer-center/precache-manifest.2c0aeab153adf1cec343dc0f38409258.js",
+    "precache-manifest.eee714b5adc55812cfaad846af2070ae.js": "/volunteer-center/precache-manifest.eee714b5adc55812cfaad846af2070ae.js",
     "service-worker.js": "/volunteer-center/service-worker.js",
-    "static/css/2.d4197120.chunk.css.map": "/volunteer-center/static/css/2.d4197120.chunk.css.map",
+    "static/css/2.c1dba388.chunk.css.map": "/volunteer-center/static/css/2.c1dba388.chunk.css.map",
     "static/css/main.3c32dfd3.chunk.css.map": "/volunteer-center/static/css/main.3c32dfd3.chunk.css.map",
-    "static/js/2.b971f6ba.chunk.js.LICENSE.txt": "/volunteer-center/static/js/2.b971f6ba.chunk.js.LICENSE.txt",
+    "static/js/2.98c0ffc1.chunk.js.LICENSE.txt": "/volunteer-center/static/js/2.98c0ffc1.chunk.js.LICENSE.txt",
     "static/media/App.scss": "/volunteer-center/static/media/anna-earl-J-Jb1niw1j0-unsplash.3dfd807c.jpg",
     "static/media/loading.svg": "/volunteer-center/static/media/loading.c5590569.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.518a7fb6.js",
-    "static/css/2.d4197120.chunk.css",
-    "static/js/2.b971f6ba.chunk.js",
+    "static/css/2.c1dba388.chunk.css",
+    "static/js/2.98c0ffc1.chunk.js",
     "static/css/main.3c32dfd3.chunk.css",
-    "static/js/main.e9f17a6a.chunk.js"
+    "static/js/main.5b353d81.chunk.js"
   ]
 }
