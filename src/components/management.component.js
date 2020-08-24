@@ -6,8 +6,9 @@ import { saveSuccessful, dateRangeError } from "../utils/alerts";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import "../partials/_main.scss";
+import moment from 'moment';
 
-export const Management = ({ addPosting, ...props}) => {
+export const Management = ({ addPosting, ...props }) => {
   const [organization, setOrganization] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('Toronto');
@@ -18,11 +19,27 @@ export const Management = ({ addPosting, ...props}) => {
   const [category, setCategory] = useState('');
   const [role, setRole] = useState('');
   const [roleDescription, setRoleDescription] = useState('');
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(moment().toDate());
+  const [endDate, setEndDate] = useState(moment().toDate());
 
   // To automatically set the focus to the first input field after submit
   const organizationInput = React.createRef();
+
+  const clearFields = () => {
+    // Clear the fields after submit
+    setOrganization('');
+    setAddress('');
+    setStateProvince('ON');
+    setCity("Toronto");
+    setPhone('');
+    setWebsite('');
+    setEmail('');
+    setCategory('');
+    setRole('');
+    setRoleDescription('');
+    setStartDate(moment().toDate());
+    setEndDate(moment().toDate());
+  }
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -45,26 +62,14 @@ export const Management = ({ addPosting, ...props}) => {
           category,
           role,
           role_description: roleDescription,
-          start_date: startDate.toLocaleDateString(),
-          end_date: endDate.toLocaleDateString(),
+          start_date: moment(startDate).format('l'), 
+          end_date: moment(endDate).format('l'),
           created: Date.now()
         }
       ],
     });
 
-    // Clear the fields after submit
-    setOrganization('');
-    setAddress('');
-    setStateProvince('ON');
-    setCity("Toronto");
-    setPhone('');
-    setWebsite('');
-    setEmail('');
-    setCategory('');
-    setRole('');
-    setRoleDescription('');
-    setStartDate(new Date());
-    setEndDate(new Date());
+    clearFields();
 
     organizationInput.current.focus();
     saveSuccessful();
@@ -219,7 +224,7 @@ export const Management = ({ addPosting, ...props}) => {
                   <DatePicker
                     selected={startDate}
                     onChange={e => setStartDate(e)}
-                    minDate={new Date()}
+                    minDate={moment().toDate()}
                   />
                 </label>
               </div>
@@ -230,7 +235,7 @@ export const Management = ({ addPosting, ...props}) => {
                   <DatePicker
                     selected={endDate}
                     onChange={e => setEndDate(e)}
-                    // minDate={state.start_date}
+                    minDate={moment(startDate).toDate()}
                   />
                 </label>
               </div>
