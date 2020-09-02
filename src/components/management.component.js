@@ -1,253 +1,214 @@
-import React, {useState} from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import DatePicker from "react-datepicker";
 import { Category } from "./category.component";
-import { saveSuccessful, dateRangeError } from "../utils/alerts";
+import {
+  saveSuccessful,
+  // dateRangeError
+} from "../utils/alerts";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import "../partials/_main.scss";
 import moment from 'moment';
+import {
+  Formik,
+  Form,
+  // Field
+} from 'formik';
+import * as Yup from 'yup';
+import {
+  TextInput,
+  TextAreaInput,
+  // DatePickerInput,
+  DateRangeInput
+} from './form-fields.component';
+
+// The keys should correspond to the name attribute of the form fields
+const initialValues = {
+  organization: '',
+  address: '',
+  city: 'Toronto',
+  state: 'ON',
+  phone: '',
+  website: '',
+  email: '',
+  category: '',
+  role: '',
+  role_description: '',
+  startDate: moment().toDate(),
+  endDate: moment().toDate()
+}
+
+const REQUIRED = 'Required'
+
+// Validation schema
+const validationSchema = Yup.object({
+  organization: Yup.string()
+    .max(30, "Maximum is 30 characters")
+    .required(REQUIRED),
+  address: Yup.string().required(REQUIRED),
+  phone: Yup.string().required(REQUIRED),
+  email: Yup.string()
+    .email("Invalid email format")
+    .max(30, "Maximum is 30 characters"),
+  category: Yup.string().required(REQUIRED),
+  role: Yup.string().required(REQUIRED),
+  role_description: Yup.string().required(REQUIRED),
+})
 
 export const Management = ({ addPosting, ...props }) => {
-  const [organization, setOrganization] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('Toronto');
-  const [stateProvince, setStateProvince] = useState('ON');
-  const [phone, setPhone] = useState('');
-  const [website, setWebsite] = useState('');
-  const [email, setEmail] = useState('');
-  const [category, setCategory] = useState('');
-  const [role, setRole] = useState('');
-  const [roleDescription, setRoleDescription] = useState('');
-  const [startDate, setStartDate] = useState(moment().toDate());
-  const [endDate, setEndDate] = useState(moment().toDate());
-
   // To automatically set the focus to the first input field after submit
   const organizationInput = React.createRef();
 
-  const clearFields = () => {
-    // Clear the fields after submit
-    setOrganization('');
-    setAddress('');
-    setStateProvince('ON');
-    setCity("Toronto");
-    setPhone('');
-    setWebsite('');
-    setEmail('');
-    setCategory('');
-    setRole('');
-    setRoleDescription('');
-    setStartDate(moment().toDate());
-    setEndDate(moment().toDate());
-  }
-
-  const handleSubmit = event => {
-    event.preventDefault();
-
-    // Validate date range. Do not continue if there's an error.
-    if (endDate < startDate) {
-      return dateRangeError();
-    }
-
+  const handleSubmit = (values, { resetForm }) => {
     addPosting({
       posting: [
-        {
-          organization,
-          address,
-          state: 'ON',
-          city,
-          phone: phone.replace(/-/g, ""),
-          website,
-          email,
-          category,
-          role,
-          role_description: roleDescription,
-          start_date: moment(startDate).format('l'), 
-          end_date: moment(endDate).format('l'),
-          created: Date.now()
-        }
-      ],
-    });
+        {...values}
+      ]
+    })
 
-    clearFields();
-
-    organizationInput.current.focus();
     saveSuccessful();
+
+    resetForm();
+    
+    organizationInput.current.focus();
+    
   }
 
   return (
-    <form action="" onSubmit={handleSubmit}>
-      <div className="fieldsetContainer">
-        <fieldset>
-          <legend>Organization Information</legend>
-          <div className="fieldsContainer">
-            <label>
-              Name <span>*</span>
-              <input
-                id="organization"
-                type="text"
-                name="organization"
-                onChange={e => setOrganization(e.target.value)}
-                value={organization}
-                placeholder="Animal Shelter"
-                size="30"
-                ref={organizationInput}
-                required
-              />
-            </label>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      <Form>
+        <div className="fieldsetContainer">
+          <fieldset>
+            <legend>Organization Information</legend>
+            <div className="fieldsContainer">
+              {
+                <>
+                  <TextInput
+                    type="text"
+                    label="Name"
+                    name="organization"
+                    placeholder="Animal Shelter"
+                    ref={organizationInput}
+                  />
 
-            <label>
-              Address <span>*</span>
-              <input
-                id="address"
-                type="text"
-                name="address"
-                onChange={e => setAddress(e.target.value)}
-                value={address}
-                placeholder="123 Main Street"
-                required
-              />
-            </label>
+                  <TextInput
+                    type="text"
+                    label="Address"
+                    name="address"
+                    placeholder="123 Main street"
+                  />
 
-            <label>
-              City
-              <input
-                id="city"
-                type="text"
-                name="city"
-                onChange={e => setCity(e.target.value)}
-                value={city}
-                disabled
-              />
-            </label>
+                  <TextInput
+                    type="text"
+                    label="City"
+                    name="city"
+                    disabled
+                  />
 
-            <label htmlFor="state">State</label>
-            <input
-              id="state"
-              type="text"
-              name="state"
-              onChange={e => setStateProvince(e.target.value)}
-              value={stateProvince}
-              disabled
-            />
+                  <TextInput
+                    type="text"
+                    label="State"
+                    name="state"
+                    disabled
+                  />
 
-            <label>
-              Phone <span>*</span>
-              <input
-                id="phone"
-                type="tel"
-                name="phone"
-                pattern="[\d]{3}-?[\d]{3}-?[\d]{4}"
-                onChange={e => setPhone(e.target.value)}
-                value={phone}
-                placeholder="416-123-4567"
-                title="Format: 416-123-4567 or 4161234567"
-                required
-              />
-            </label>
+                  <TextInput
+                    type="tel"
+                    name="phone"
+                    label="Phone"
+                    pattern="[\d]{3}-?[\d]{3}-?[\d]{4}"
+                    placeholder="416-123-4567"
+                    title="Format: 416-123-4567 or 4161234567"
+                  />
 
-            <label>
-              Website
-              <input
-                id="website"
-                type="url"
-                name="website"
-                onChange={e => setWebsite(e.target.value)}
-                value={website}
-                placeholder="https://organization.com"
-              />
-            </label>
-            
-            <label>
-              Email
-              <input
-                id="email"
-                type="email"
-                name="email"
-                onChange={e => setEmail(e.target.value)}
-                value={email}
-                size="30"
-                placeholder="johndoe@domain.com"
-              />
-            </label>
-          </div>
-        </fieldset>
+                  <TextInput
+                    type="url"
+                    name="website"
+                    label="Website"
+                    placeholder="https://organization.com"
+                  />
 
-        <fieldset>
-          <legend>About the Role</legend>
-          <div className="fieldsContainer">
-            <label>
-              Category <span>*</span>
-              <Category
-                name="category"
-                id="category"
-                onChange={e => setCategory(e.target.value)}
-                value={category}
-                required="required"
-                defaultText="Select Category"
-                {...props}
-              />
-            </label>
+                  <TextInput
+                    type="email"
+                    name="email"
+                    label="Email"
+                    placeholder="johndoe@domain.com"
+                  />
+                </>
+              }
+            </div>
+          </fieldset>
 
-            <label>
-              Role <span>*</span>
-              <input
-                id="role"
+          <fieldset>
+            <legend>About the Role</legend>
+            <div className="fieldsContainer">
+              <Category />
+              <TextInput
                 type="text"
                 name="role"
-                onChange={e => setRole(e.target.value)}
-                value={role}
-                placeholder="Dog Walker"
-                required
+                label="Role"
+                placeholder="Dog walker"
               />
-            </label>
-            
-            <label>
-              Description <span>*</span>
-              <textarea
+
+              <TextAreaInput
                 className="textArea"
                 maxLength="500"
-                id="roleDescription"
-                type="text"
                 name="role_description"
-                onChange={e => setRoleDescription(e.target.value)}
-                value={roleDescription}
+                label="Role Description"
                 placeholder="What is the role about? How to apply? (Maximum of 500 characters)"
-                required
               />
-            </label>
-            
-            <div className="startEndDateContainer">
-              <div className="dateContainer">
-                <label>
-                  Start Date
-                  <DatePicker
-                    selected={startDate}
-                    onChange={e => setStartDate(e)}
-                    minDate={moment().toDate()}
-                  />
-                </label>
-              </div>
 
-              <div className="dateContainer">
-                <label>
-                  End Date
-                  <DatePicker
-                    selected={endDate}
-                    onChange={e => setEndDate(e)}
-                    minDate={moment(startDate).toDate()}
+              
+              <div className="startEndDateContainer">
+                {/* <div className="dateContainer">
+                  <DatePickerInput
+                    name="startDate"
+                    label="Start Date"
+                    selected={initialValues.startDate}
+                    minDate={initialValues.startDate}
                   />
-                </label>
+                </div> */}
+
+                {/* <Field>
+                  {
+                    (props) => {
+                      const startDate = moment(props.field.value.startDate).toDate()
+                      const endDate = moment(props.field.value.endDate).toDate()
+                      const isDateRangeValid = Boolean(startDate < endDate)
+
+                      return (  
+                        <div className="dateContainer">
+                          <DatePickerInput
+                            name="endDate"
+                            label="End Date"
+                            selected={
+                              isDateRangeValid ? endDate : startDate
+                            }
+                            minDate={startDate}
+                          />
+                        </div>
+                      )
+                    }
+                  }
+                </Field> */}
+
+                <DateRangeInput
+                  selectedStartDate={initialValues.startDate}
+                  minStartDate={initialValues.startDate}
+                  selectedEndDate={initialValues.startDate}
+                  minEndDate={initialValues.startDate}
+                />
               </div>
             </div>
-          </div>
-        </fieldset>
-      </div>
-      <button className="formSubmit">SUBMIT</button>
-      <p>
-        <span>*</span> required fields
-			</p>
-    </form>
+          </fieldset>
+        </div> 
+        <button type="submit" className="formSubmit">SUBMIT</button>
+      </Form>
+    </Formik>
   );
 };
 
