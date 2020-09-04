@@ -2,14 +2,18 @@ import {
   selectAllPostings,
   selectActivePostings
 } from './postingSelectors';
+import moment from 'moment';
+
+const currentPostingStartDate = moment().format('L');
+const currentPostingEndDate = moment().add(1, 'M').format('L');
 
 const mockPostings = [
   {
     id: 'posting_1',
     role: 'role_1',
     organization: 'org_1',
-    start_date: '8/1/2020',
-    end_date: '8/30/2020',
+    start_date: currentPostingStartDate,
+    end_date: currentPostingEndDate,
     category: "community"
   },
   {
@@ -39,8 +43,8 @@ describe('postingSelectors', () => {
           id: 'posting_1',
           role: 'role_1',
           organization: 'org_1',
-          start_date: '8/1/2020',
-          end_date: '8/30/2020',
+          start_date: currentPostingStartDate,
+          end_date: currentPostingEndDate,
           category: "community"
         },
         {
@@ -61,8 +65,8 @@ describe('postingSelectors', () => {
           id: 'posting_1',
           role: 'role_1',
           organization: 'org_1',
-          start_date: '8/1/2020',
-          end_date: '8/30/2020',
+          start_date: currentPostingStartDate,
+          end_date: currentPostingEndDate,
           category: "community"
         }
       ])

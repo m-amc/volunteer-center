@@ -11,7 +11,7 @@ export const Opportunities = ({ activePostings: postedOpportunities }) => {
             <div>
               <h2>{post.role}</h2>
               <p className="postingDateRange">
-                From {post.start_date} to {post.end_date}
+                From {moment(post.start_date).format("l")} to {moment(post.end_date).format('l')}
               </p>
               <p className="postingRoleDescription">{post.role_description}</p>
               <p className="postedDate">
@@ -29,7 +29,7 @@ export const Opportunities = ({ activePostings: postedOpportunities }) => {
               </p>
               <p>{post.phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3")}</p>
               <a href={post.website}>{post.website}</a>
-              <p>{post.email_address}</p>
+              <p>{post.email}</p>
             </div>
           </li>
         );
