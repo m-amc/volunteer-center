@@ -60,7 +60,9 @@ export const Main = ({
                 path="/"
                 render={() => (
                   <>
-                    <FilterCategory {...filterCategoryProps} />
+                    <div className="filterCategory">
+                      <FilterCategory {...filterCategoryProps} />
+                    </div>
                     <Opportunities activePostings={activePostings} />
 
                     <div

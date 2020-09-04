@@ -41,9 +41,11 @@ select::-ms-expand {
 // COMPONENT: OPPORTUNITIES
 // Filter Category
 .filterCategory {
-	margin-top: 2rem;
-	p {
-		display: inline-block;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  
+	label {
 		padding-right: 1rem;
 		font-size: 2rem;
 	}

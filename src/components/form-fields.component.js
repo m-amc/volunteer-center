@@ -25,9 +25,8 @@ export const SelectInput = ({ label, options, ...props }) => {
 
   return (
     <>
-      <label>
-        {label}
-        <select {...field} {...props}>
+      <label htmlFor={props.id || props.name}>{label}</label>
+      <select id={props.id || props.name} {...field} {...props}>
           <option value="">Select a value</option>
           {
             options.map(option => 
@@ -40,7 +39,6 @@ export const SelectInput = ({ label, options, ...props }) => {
               )
           }
         </select>
-      </label>
       {
         meta.touched && meta.error ? (
           <div className="error">
