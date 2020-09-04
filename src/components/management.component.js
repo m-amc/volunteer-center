@@ -53,8 +53,7 @@ const validationSchema = Yup.object({
   role_description: Yup.string().required(REQUIRED),
 })
 
-export const Management = ({ addPosting, ...props }) => {
-  // To automatically set the focus to the first input field after submit
+export const Management = ({ addPosting }) => {
   const organizationInput = React.createRef();
 
   const handleSubmit = (values, { resetForm }) => {
@@ -63,10 +62,9 @@ export const Management = ({ addPosting, ...props }) => {
         { ...values, created: moment().format() },
       ]
     })
-
+    organizationInput.current.focus();
     saveSuccessful();
     resetForm();
-    organizationInput.current.focus();
   }
 
   return (
@@ -157,38 +155,42 @@ export const Management = ({ addPosting, ...props }) => {
                 placeholder="What is the role about? How to apply? (Maximum of 500 characters)"
               />
 
-              {/* Implement as individual field */}
-              <Field name="start_date">
-                {
-                  props => {
-                    const { field, form } = props;
-                    const startDate = moment(field.value).toDate();
-                    const endDate = moment(form.values.end_date).toDate()
-                    const isDateRangeValid = Boolean(startDate <= endDate)
+              <div className="startEndDateContainer">
+                <div className="dateContainer">
+                  <Field name="start_date">
+                    {
+                      props => {
+                        const { field, form } = props;
+                        const startDate = moment(field.value).toDate();
+                        const endDate = moment(form.values.end_date).toDate()
+                        const isDateRangeValid = Boolean(startDate <= endDate)
 
-                    return (
-                      <DatePickerInput
-                        label="Start Date"
-                        {...props}
-                        onChange={isDateRangeValid ? startDate : form.setFieldValue("end_date", moment(startDate).format())}
-                      />
-                    )
-                  }
-                }
-              </Field>
-
-              <Field name="end_date">
-                {
-                  props => {
-                    return (
-                      <DatePickerInput
-                        label="End Date"
-                        {...props}
-                      />
-                    )
-                  }
-                }
-              </Field>
+                        return (
+                          <DatePickerInput
+                            label="Start Date"
+                            {...props}
+                            onChange={isDateRangeValid ? startDate : form.setFieldValue("end_date", moment(startDate).format())}
+                          />
+                        )
+                      }
+                    }
+                  </Field>
+                </div>
+                <div className="dateContainer">
+                  <Field name="end_date">
+                    {
+                      props => {
+                        return (
+                          <DatePickerInput
+                            label="End Date"
+                            {...props}
+                          />
+                        )
+                      }
+                    }
+                  </Field>
+                </div>
+              </div>
             </div>
           </fieldset>
         </div> 

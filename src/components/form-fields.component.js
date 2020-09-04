@@ -1,44 +1,46 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import { useField } from 'formik'
 import DatePicker from "react-datepicker";
 import moment from 'moment'
 
-export const TextInput = ({ label, ...props }) => {
+export const TextInput = forwardRef( (props, ref) => {
   const [field, meta] = useField(props);
+  const { label } = props;
   return (
-    <>
-      <label htmlFor={props.id || props.name}>{label}</label>
-      <input {...field} {...props} />
+    <label>
+      {label}
+      <input ref={ref} {...field} {...props} />
       {
         meta.touched && meta.error ? (
           <div className="error">
             {meta.error}
           </div>
-        ) : null}
-    </>
+          ) : null}
+    </label>
   )
-}
+})
 
 export const SelectInput = ({ label, options, ...props }) => {
   const [field, meta] = useField(props);
 
   return (
     <>
-      <label htmlFor={props.id || props.name}>{label}</label>
-      <select {...field} {...props}>
-        <option value="">Select a value</option>
-        {
-          options.map(option => 
-            <option
-              key={option.value}
-              value={option.value}
-            >
-              {option.label || option.value}
-            </option>
-            )
-        }
-      </select>
-
+      <label>
+        {label}
+        <select {...field} {...props}>
+          <option value="">Select a value</option>
+          {
+            options.map(option => 
+              <option
+                key={option.value}
+                value={option.value}
+              >
+                {option.label || option.value}
+              </option>
+              )
+          }
+        </select>
+      </label>
       {
         meta.touched && meta.error ? (
           <div className="error">
@@ -53,8 +55,8 @@ export const TextAreaInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
 
   return (
-    <>
-      <label htmlFor={props.id || props.name}>{label}</label>
+    <label>
+      {label}
       <textarea {...field} {...props} />
       {
         meta.touched && meta.error ? (
@@ -62,7 +64,7 @@ export const TextAreaInput = ({ label, ...props }) => {
             {meta.error}
           </div>
         ) : null}
-    </>
+    </label>
   )
 }
 
@@ -74,13 +76,15 @@ export const DatePickerInput = ({
 
   return (
     <>
-      <label htmlFor={props.id || props.name}>{label}</label>
-      <DatePicker
-        name={field.name}
-        selected={moment(field.value).toDate()}
-        minDate={moment(field.value).toDate()}
-        onChange={e => props.form.setFieldValue(field.name, moment(e).format())}
-      />
+      <label>
+        {label}
+        <DatePicker
+          name={field.name}
+          selected={moment(field.value).toDate()}
+          minDate={moment(field.value).toDate()}
+          onChange={e => props.form.setFieldValue(field.name, moment(e).format())}
+        />
+      </label>
     </>
   )
 }
