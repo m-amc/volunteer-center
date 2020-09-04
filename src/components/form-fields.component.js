@@ -27,7 +27,6 @@ export const SelectInput = ({ label, options, ...props }) => {
     <>
       <label htmlFor={props.id || props.name}>{label}</label>
       <select id={props.id || props.name} {...field} {...props}>
-          <option value="">Select a value</option>
           {
             options.map(option => 
               <option

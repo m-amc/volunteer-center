@@ -9,6 +9,7 @@ export const Category = props => (
     name="category"
     label="Category"
     options={[
+      { value: "", label: "Select a category"},
       { value: "community", label: "Community" },
       { value: "education", label: "Education" },
       { value: "forestry", label: "Forestry" },
