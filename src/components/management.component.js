@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Category } from "./category.component";
 import {
   saveSuccessful,
-  // dateRangeError
 } from "../utils/alerts";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
@@ -12,13 +11,11 @@ import moment from 'moment';
 import {
   Formik,
   Form,
-  // Field
 } from 'formik';
 import * as Yup from 'yup';
 import {
   TextInput,
   TextAreaInput,
-  // DatePickerInput,
   DateRangeInput
 } from './form-fields.component';
 
@@ -34,8 +31,8 @@ const initialValues = {
   category: '',
   role: '',
   role_description: '',
-  startDate: moment().toDate(),
-  endDate: moment().toDate()
+  start_date: moment().toDate(),
+  end_date: moment().toDate()
 }
 
 const REQUIRED = 'Required'
@@ -67,11 +64,8 @@ export const Management = ({ addPosting, ...props }) => {
     })
 
     saveSuccessful();
-
     resetForm();
-    
     organizationInput.current.focus();
-    
   }
 
   return (
@@ -162,47 +156,12 @@ export const Management = ({ addPosting, ...props }) => {
                 placeholder="What is the role about? How to apply? (Maximum of 500 characters)"
               />
 
-              
-              <div className="startEndDateContainer">
-                {/* <div className="dateContainer">
-                  <DatePickerInput
-                    name="startDate"
-                    label="Start Date"
-                    selected={initialValues.startDate}
-                    minDate={initialValues.startDate}
-                  />
-                </div> */}
-
-                {/* <Field>
-                  {
-                    (props) => {
-                      const startDate = moment(props.field.value.startDate).toDate()
-                      const endDate = moment(props.field.value.endDate).toDate()
-                      const isDateRangeValid = Boolean(startDate < endDate)
-
-                      return (  
-                        <div className="dateContainer">
-                          <DatePickerInput
-                            name="endDate"
-                            label="End Date"
-                            selected={
-                              isDateRangeValid ? endDate : startDate
-                            }
-                            minDate={startDate}
-                          />
-                        </div>
-                      )
-                    }
-                  }
-                </Field> */}
-
-                <DateRangeInput
-                  selectedStartDate={initialValues.startDate}
-                  minStartDate={initialValues.startDate}
-                  selectedEndDate={initialValues.startDate}
-                  minEndDate={initialValues.startDate}
-                />
-              </div>
+              <DateRangeInput
+                selectedStartDate={initialValues.start_date}
+                minStartDate={initialValues.start_date}
+                selectedEndDate={initialValues.start_date}
+                minEndDate={initialValues.start_date}
+              />
             </div>
           </fieldset>
         </div> 

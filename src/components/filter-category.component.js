@@ -1,13 +1,14 @@
 import React from "react";
 import { Category } from "./category.component";
+import {Formik} from 'formik';
 
 export const FilterCategory = ({ category, handleCategoryChange }) => (
   <div className="filterCategory">
-    <p>Filter:</p>
-    <Category
-      onChange={handleCategoryChange}
-      value={category}
-      defaultText="All Category"
-    />
+    <Formik>
+      <Category
+        label="Filter: Category"
+        onChange={handleCategoryChange}
+      />
+    </Formik>
   </div>
 );

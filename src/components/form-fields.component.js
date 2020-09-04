@@ -75,16 +75,14 @@ export const DatePickerInput = ({
   const [field] = useField(props)
 
   return (
-    <div className="startEndDateContainer">
-      <div className="dateContainer">
-        <label htmlFor={props.id || props.name}>{label}</label>
-        <DatePicker
-          {...field}
-          {...props}
-          onChange={e => setFieldValue(field.name, moment(e).format('l'))}
-        />
-      </div>
-    </div>
+    <>
+      <label htmlFor={props.id || props.name}>{label}</label>
+      <DatePicker
+        {...field}
+        {...props}
+        onChange={e => setFieldValue(field.name, moment(e).format('l'))}
+      />
+    </>
   )
 }
 
@@ -95,23 +93,35 @@ export const DateRangeInput = ({
   minEndDate,
   ...props
 }) => {
-  return (
-    <>
-      <DatePickerInput
-        label="Start Date"
-        name="startDate"
-        selected={selectedStartDate}
-        minDate={minStartDate}
-        {...props}
-      />
+  const { setFieldValue } = useFormikContext();
+  const [field] = useField(props);
 
-      <DatePickerInput
-        label="End Date"
-        name="endDate"
-        selected={selectedEndDate}
-        minDate={minEndDate}
-        {...props}
-      />
-    </>
+  const startDate = moment(field.value.start_date).toDate();
+  const endDate = moment(field.value.end_date).toDate()
+  const isDateRangeValid = Boolean(startDate <= endDate)
+
+  return (
+    <div className="startEndDateContainer">
+      <div className="dateContainer">
+        <DatePickerInput
+          label="Start Date"
+          name="start_date"
+          selected={selectedStartDate}
+          minDate={minStartDate}
+          onChange={isDateRangeValid ? startDate : setFieldValue("end_date", moment(startDate).format('l'))}
+          {...props}
+        />
+      </div>
+
+      <div className="dateContainer">
+        <DatePickerInput
+          label="End Date"
+          name="end_date"
+          selected={moment(field.value.start_date).toDate()}
+          minDate={moment(field.value.start_date).toDate()}
+          {...props}
+        />
+      </div>
+    </div>
   )
 }

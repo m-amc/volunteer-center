@@ -3,7 +3,7 @@ import {
   SelectInput
 } from './form-fields.component';
 
-export const Category = () => (
+export const Category = props => (
   <SelectInput
     id="category"
     name="category"
@@ -19,6 +19,7 @@ export const Category = () => (
       { value: "sports", label: "Sports" },
       { value: "tourism", label: "Tourism" },
     ]}
+    {...props}
   />
 );
 
